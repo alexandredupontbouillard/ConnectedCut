@@ -1,0 +1,15 @@
+all: ../Graph.o ../heap.o generate_instance.o
+	g++  ../Graph.o ../heap.o generate_instance.o -o generate_instance
+
+../heap.o: ../heap.cpp ../heap.h
+	g++ -c ../heap.cpp -o ../heap.o
+
+../Graph.o: ../Graph.cpp ../Graph.h 
+	g++ -c ../Graph.cpp -o ../Graph.o
+
+generate_instance.o: generate_instance.cpp
+	g++ -c generate_instance.cpp -o generate_instance.o
+
+clean:
+	rm -f *.o
+	rm -f prog

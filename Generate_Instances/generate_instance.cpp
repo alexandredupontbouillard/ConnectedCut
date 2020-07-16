@@ -1,0 +1,397 @@
+#include<iostream>
+#include<fstream>
+#include<sstream>
+#include<cstring>
+#include<vector>
+#include<cstdlib>
+#include<cmath>
+
+#include <lemon/maps.h>
+#include <lemon/kruskal.h>
+#include <lemon/list_graph.h>
+
+#define INF 1e10
+
+using namespace lemon;
+using namespace lemon::concepts;
+
+using namespace std;
+
+#include"../Graph.h"
+
+
+double dist(double x1, double y1, double x2, double y2){
+  return(sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2)));
+
+}
+
+
+
+
+//////////////////
+////METHOD 0//////
+//////////////////
+
+void method0(Graph &G, int k){
+  int i,j,u1,u2;
+
+  vector<vector<int> > marque;
+  list<pair<double,int> >L;
+  list<pair<double,int> >::const_iterator it;
+
+  marque=vector<vector<int> >(G._nbNodes);
+  for (i=0;i<G._nbNodes;i++)
+    marque[i]=vector<int>(G._nbNodes,0);
+  //marque les aretes prises dans la solution
+
+
+  for (i=0;i<G._nbNodes;i++){
+    L.clear();
+    for (j=0;j<G._nbNodes;j++){
+      if (i!=j) L.push_back(make_pair(dist(G._nodes[i]._coordx,G._nodes[i]._coordy,
+					   G._nodes[j]._coordx,G._nodes[j]._coordy),j));
+    }
+    L.sort();
+
+    it=L.begin();
+    for (j=0;j<k;j++){
+      if (marque[i][(*it).second]==0){
+	if (i<(*it).second)
+	  G.AddEdge(0,i,(*it).second,dist(G._nodes[i]._coordx,G._nodes[i]._coordy,
+			       G._nodes[(*it).second]._coordx,G._nodes[(*it).second]._coordy));
+	else
+	  G.AddEdge(0,(*it).second,i,dist(G._nodes[i]._coordx,G._nodes[i]._coordy,
+			       G._nodes[(*it).second]._coordx,G._nodes[(*it).second]._coordy));
+	marque[i][(*it).second]=1;
+	marque[(*it).second][i]=1;
+      }
+      it++;
+    }
+  }
+
+  // On teste si le graphe obtenu est connexe
+  vector<int>T=vector<int>(G._nbNodes,0);; 
+  vector<double>D=vector<double>(G._nbNodes,0);;
+  vector<int>card=vector<int>(G._nbNodes,0);;
+  heap H(G._nbNodes);
+  double val;
+  val=G.Dijkstra(0,-1,T,D,card,H);
+  i=1;
+  while((T[i]!=-1)&&(i<G._nbNodes)) i++;
+
+  if (i==G._nbNodes){
+    cout<<"The Instance is connected at the end of the first step"<<endl;
+  }
+  else{
+    cout<<"The Instance isn't connected at the end of the first step"<<endl;
+    cout<<"A spanning shortest tree is added"<<endl;
+    
+    ListGraph g;
+    ListGraph::EdgeMap<double> edge_cost_map(g); 
+    vector<ListGraph::Node> v_som;
+    ListGraph::Edge arete;
+
+    v_som.resize(G._nbNodes);
+ 
+    for (i=0;i<G._nbNodes;i++)
+      v_som[i]=g.addNode();
+ 
+ 
+    for (i=0;i<G._nbNodes;i++){
+      for(j=i+1;j<G._nbNodes;j++){
+        arete=g.addEdge(v_som[i],v_som[j]);
+        edge_cost_map.set(arete, dist(G._nodes[i]._coordx,G._nodes[i]._coordy,
+				      G._nodes[j]._coordx,G._nodes[j]._coordy));
+      }
+    }
+
+    vector<ListGraph::Edge> tree_edge_vec;
+
+    kruskal(g, edge_cost_map, std::back_inserter(tree_edge_vec));
+
+    for(i=0; i<tree_edge_vec.size(); i++){
+      u1=g.id(g.u(tree_edge_vec[i]));
+      u2=g.id(g.v(tree_edge_vec[i]));
+ 
+      if (u1<u2){
+	if (marque[u1][u2]==0)
+	  G.AddEdge(0,u1,u2,dist(G._nodes[u1]._coordx,G._nodes[u1]._coordy,
+				 G._nodes[u2]._coordx,G._nodes[u2]._coordy));
+      }
+      else
+	if (marque[u2][u1]==0)
+	  G.AddEdge(0,u2,u1,dist(G._nodes[u1]._coordx,G._nodes[u1]._coordy,
+				 G._nodes[u2]._coordx,G._nodes[u2]._coordy));
+    }
+    
+  }
+
+}
+
+//////////////////
+////METHOD 1//////
+//////////////////
+
+void method1(Graph &G, int k){
+  int i,j,u1,u2;
+
+  vector<vector<int> > marque;
+ 
+  marque=vector<vector<int> >(G._nbNodes);
+  for (i=0;i<G._nbNodes;i++)
+    marque[i]=vector<int>(G._nbNodes,0);
+  //marque les aretes prises dans la solution
+
+
+  for (i=0;i<G._nbNodes;i++){
+    for (j=i+1;j<G._nbNodes;j++){
+      if (dist(G._nodes[i]._coordx,G._nodes[i]._coordy,G._nodes[j]._coordx,G._nodes[j]._coordy)<=k){
+	G.AddEdge(0,i,j,dist(G._nodes[i]._coordx,G._nodes[i]._coordy,
+			     G._nodes[j]._coordx,G._nodes[j]._coordy));
+	marque[i][j]=1;
+	marque[j][i]=1;
+      }
+    }
+  }
+
+  // On teste si le graphe obtenu est connexe
+  vector<int>T=vector<int>(G._nbNodes,0);
+  vector<double>D=vector<double>(G._nbNodes,0);
+  vector<int> card=vector<int>(G._nbNodes,0);
+  heap H(G._nbNodes);
+  double val;
+  val=G.Dijkstra(0,-1,T,D,card,H);
+  i=1;
+  while((T[i]!=-1)&&(i<G._nbNodes)) i++;
+
+  if (i==G._nbNodes){
+    cout<<"The Instance is connected at the end of the first step"<<endl;
+  }
+  else{
+    cout<<"The Instance isn't connected at the end of the first step"<<endl;
+    cout<<"A spanning shortest tree is added"<<endl;
+    
+    ListGraph g;
+    ListGraph::EdgeMap<double> edge_cost_map(g); 
+    vector<ListGraph::Node> v_som;
+    ListGraph::Edge arete;
+
+    v_som.resize(G._nbNodes);
+ 
+    for (i=0;i<G._nbNodes;i++)
+      v_som[i]=g.addNode();
+ 
+ 
+    for (i=0;i<G._nbNodes;i++){
+      for(j=i+1;j<G._nbNodes;j++){
+        arete=g.addEdge(v_som[i],v_som[j]);
+        edge_cost_map.set(arete, dist(G._nodes[i]._coordx,G._nodes[i]._coordy,
+				      G._nodes[j]._coordx,G._nodes[j]._coordy));
+      }
+    }
+
+    vector<ListGraph::Edge> tree_edge_vec;
+
+    kruskal(g, edge_cost_map, std::back_inserter(tree_edge_vec));
+
+    for(i=0; i<tree_edge_vec.size(); i++){
+      u1=g.id(g.u(tree_edge_vec[i]));
+      u2=g.id(g.v(tree_edge_vec[i]));
+ 
+      if (u1<u2){
+	if (marque[u1][u2]==0)
+	  G.AddEdge(0,u1,u2,dist(G._nodes[u1]._coordx,G._nodes[u1]._coordy,
+				 G._nodes[u2]._coordx,G._nodes[u2]._coordy));
+      }
+      else
+	if (marque[u2][u1]==0)
+	  G.AddEdge(0,u2,u1,dist(G._nodes[u1]._coordx,G._nodes[u1]._coordy,
+				 G._nodes[u2]._coordx,G._nodes[u2]._coordy));
+    }
+    
+  }
+
+
+
+}
+
+//////////////////
+////METHOD 2//////
+//////////////////
+
+void method2(Graph &G, int k){
+  int i,j,l,u1,u2;
+
+  ListGraph g;
+  ListGraph::EdgeMap<double> edge_cost_map(g); 
+   vector<ListGraph::Node> v_som;
+  ListGraph::Edge arete;
+
+  v_som.resize(G._nbNodes);
+ 
+  for (i=0;i<G._nbNodes;i++)
+    v_som[i]=g.addNode();
+ 
+ 
+  for (i=0;i<G._nbNodes;i++){
+    for(j=i+1;j<G._nbNodes;j++){
+        arete=g.addEdge(v_som[i],v_som[j]);
+        edge_cost_map.set(arete, dist(G._nodes[i]._coordx,G._nodes[i]._coordy,
+				      G._nodes[j]._coordx,G._nodes[j]._coordy));
+    }
+  }
+ 
+
+  vector<ListGraph::Edge> tree_edge_vec;
+
+  l=0;
+  do{
+
+    kruskal(g, edge_cost_map, std::back_inserter(tree_edge_vec));
+
+      for(i=0; i<tree_edge_vec.size(); i++){
+	u1=g.id(g.u(tree_edge_vec[i]));
+	u2=g.id(g.v(tree_edge_vec[i]));
+
+ 
+	if (u1<u2)
+	  G.AddEdge(0,u1,u2,dist(G._nodes[u1]._coordx,G._nodes[u1]._coordy,
+				 G._nodes[u2]._coordx,G._nodes[u2]._coordy));
+	else
+	  G.AddEdge(0,u2,u1,dist(G._nodes[u1]._coordx,G._nodes[u1]._coordy,
+				 G._nodes[u2]._coordx,G._nodes[u2]._coordy));
+
+	edge_cost_map[tree_edge_vec[i]]=INF;
+      }
+      tree_edge_vec.clear();
+  
+ 
+    l++;
+
+  }
+  while (l<k);
+
+}
+
+
+int main(int argc,char**argv){
+
+  int nbsom;
+  int i,j,u1,u2;
+  string ch;
+  ostringstream nomSortie;
+  string nomInstance;
+  int method;
+  int k;
+  double minx,maxx,miny,maxy;
+ 
+
+  if(argc!=4){
+    cerr<<"usage: "<<argv[0]<<" <file.tsp> <method> <k>"<<endl;
+    cerr<<"         Method: 0 for k nearest neighbour per node"<<endl;
+    cerr<<"                 1 for a disk-graph of ray k"<<endl;
+    cerr<<"                 2 for k distinct spanning trees"<<endl;
+    return 1;
+  }
+
+  nomInstance=argv[1];
+  method=atoi(argv[2]);
+  k=atoi(argv[3]);
+
+  ifstream fic(nomInstance.c_str());
+
+  nomInstance.erase(nomInstance.find_last_of("."));
+  nomSortie.str("");
+  nomSortie<<nomInstance.c_str();
+
+  do{
+    fic >>ch;
+  }while (strcmp(ch.c_str(),"DIMENSION"));
+
+
+  fic>>ch;
+  if (strcmp(ch.c_str(),":")){
+    nbsom=atoi(ch.c_str());
+  }
+  else{
+    fic>>nbsom;
+  }
+
+
+  Graph G(nbsom);
+  G._instance_name=nomInstance;
+ 
+  do{
+    fic>>ch;
+  }while ((strcmp(ch.c_str(),"NODE_COORD_SECTION")));
+
+  fic>>ch;
+  fic>>G._nodes[0]._coordx;
+  fic>>G._nodes[0]._coordy;
+
+  minx=G._nodes[0]._coordx;
+  maxx=G._nodes[0]._coordx;
+  miny=G._nodes[0]._coordy;
+  maxy=G._nodes[0]._coordy;
+
+  for (i=1;i<nbsom;i++){
+    fic>>ch;
+    fic>>G._nodes[i]._coordx;
+    fic>>G._nodes[i]._coordy;
+
+    if (G._nodes[i]._coordx<minx)  minx=G._nodes[i]._coordx;
+    if (G._nodes[i]._coordx>maxx)  maxx=G._nodes[i]._coordx;
+    if (G._nodes[i]._coordy<miny)  miny=G._nodes[i]._coordy;
+    if (G._nodes[i]._coordx>maxy)  maxy=G._nodes[i]._coordy;
+  }
+
+  for (i=0;i<nbsom;i++){
+    G._nodes[i]._coordx-=minx;
+    G._nodes[i]._coordy-=miny;
+  }
+  maxx-=minx;
+  maxy-=miny;
+
+  if (maxx>maxy){
+    for (i=0;i<nbsom;i++){
+      G._nodes[i]._coordx= G._nodes[i]._coordx*1000/maxx;
+      G._nodes[i]._coordy= G._nodes[i]._coordy*1000/maxx;
+    }
+  }
+  else{
+  for (i=0;i<nbsom;i++){
+      G._nodes[i]._coordx= G._nodes[i]._coordx*1000/maxy;
+      G._nodes[i]._coordy= G._nodes[i]._coordy*1000/maxy;
+    }
+
+  }
+
+  fic.close();
+
+  if (method==0) method0(G,k);
+  if (method==1) method1(G,k);
+  if (method==2) method2(G,k);
+ 
+  ostringstream nomSortie1;
+  nomSortie1.str("");
+  nomSortie1<<"meth"<<method<<"_"<<k<<"_";
+  if (G._nbNodes<10) nomSortie1<<0;
+  if (G._nbNodes<100) nomSortie1<<0;
+  if (G._nbNodes<1000) nomSortie1<<0;
+  nomSortie1<<G._nbNodes<<"_"<<G._instance_name<<".dat";
+  ofstream fic2(nomSortie1.str().c_str());
+
+  fic2<<G._nbNodes<<" "<<G._edges.size()<<endl;
+  for (i=0;i<G._nbNodes;i++)
+    fic2<<"v "<<i<<" "<<G._nodes[i]._coordx<<" "<<G._nodes[i]._coordy<<endl;
+  list<Edge*>::const_iterator it;
+  for (it=G._edges.begin();it!=G._edges.end();it++)
+    fic2<<"e "<<(*it)->_first<<" "<<(*it)->_last<<" "<<(*it)->_cost<<endl;
+  fic2.close();
+
+  G.Write_ps_pdf();
+
+  //G.Print();
+
+  return(0);
+}
