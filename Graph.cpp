@@ -7,6 +7,14 @@
 #include <iostream>
 using namespace::std;
 
+
+bool is_number(const std::string& s)
+{
+    std::string::const_iterator it = s.begin();
+    while (it != s.end() && std::isdigit(*it)) ++it;
+    return !s.empty() && it == s.end();
+}
+
 //////////////////////////////
 //////// EDGE ////////////////
 //////////////////////////////
@@ -129,10 +137,11 @@ Graph::Graph(const char* filename){
   _instance_name=filename;
 
   ifstream fic(filename);
-  
-  fic>>_nbNodes;
+  string str;
+  fic>>str;
 	
-  if(_nbNodes !=0){
+  if( is_number(str)){
+	  _nbNodes = stoi(str);
 	  fic>>nbedge;
 
 	  _nodes = vector<Node>(_nbNodes);
@@ -158,15 +167,11 @@ Graph::Graph(const char* filename){
 	
 	fic>>second;
 	bool b = true;
-	cout<<first<<endl;
-	cout<<second<<endl;
-	cout<<"yo"<<endl;
 	
-	cout<<"la ça va"<<endl;
-	/*
+	
+	
 	while(not ( ( first== "p" and second=="edge") or (first=="edge" and second=="p") )){
-		cout<<"first : "<<first<<endl;
-		cout<<"second : " << second<<endl;
+		
 		if(b){
 			b = false;
 			fic>>first;
@@ -177,30 +182,38 @@ Graph::Graph(const char* filename){
 		}
 
 	}
-	cout<<"la ça va"<<endl;
+	
 	fic>>_nbNodes;
+
+	_nodes = vector<Node>(_nbNodes);
 	for (i = 0; i < _nbNodes; i++){
 	    _nodes[i]= Node(i,_nbNodes,0,0);
 	  }
 	
 	int nbEdge;
 	fic>>nbEdge;
+	
 	int f;
 	int l;
+	
 	for (i = 0; i < nbEdge; i++){
+	    cout<<i<<endl;
 	    fic>>c;
+	    cout<<c<<endl;
 	    fic>>f;
 	    fic>>l;
-	    AddEdge(i, f,l,1);
+	    
+	    AddEdge(i, f-1,l-1,1);
 	  }
-	*/
+	
 
 
 	
 
   }
+  
   fic.close();
-
+ 
 }
 
 
