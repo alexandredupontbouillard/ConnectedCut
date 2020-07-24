@@ -3,6 +3,9 @@
 #include <vector>
 #include <cstdlib>
 #include "Graph.h"
+#include "statStruct.h"
+#include <ctime>
+#define fResultName "result.csv"
 #define epsilon 0.00001
 int main(int argc, char** argv){
 	IloEnv env;
@@ -18,10 +21,11 @@ int main(int argc, char** argv){
 		Graph G(argv[1]);
 		
 
-	
-	
-
-
+	int nbCst= 0;
+	statStruct stat;
+    	stat.init();
+	stat.start = clock();
+	stat.formulation = "hojnyFlot";
 	IloRangeArray CC(env);
 	IloExpr c1(env);
 	
@@ -63,6 +67,7 @@ int main(int argc, char** argv){
 		IloExpr c1(env);
 		c1+= sommets[i].first + sommets[i].second ;
 		CC.add(c1 == 1);
+		nbCst++;
 
 	}
 
@@ -83,7 +88,7 @@ int main(int argc, char** argv){
 		IloExpr c3(env);
 		c3+= sommets[(*itEdge)->_first].first + sommets[(*itEdge)->_last].first + edge[i];
 		CC.add(c3 <= 2);
-
+		nbCst = nbCst+3;
 		i++;
 	}
 
@@ -100,7 +105,7 @@ int main(int argc, char** argv){
 		IloExpr c3(env);
 		c3+= sommets[(*itEdge)->_first].second + sommets[(*itEdge)->_last].second + edge[i];
 		CC.add(c3 <= 2);
-
+		nbCst=nbCst+3;
 		i++;
 	}
 
@@ -117,7 +122,7 @@ int main(int argc, char** argv){
 	}
 	CC.add(c2 == 1);
 	CC.add(c3==1);
-
+	nbCst=nbCst+2;
 	//contrainte 2b
 	
 
@@ -131,7 +136,7 @@ int main(int argc, char** argv){
 		
 		CC.add(c4 <= 0);
 		CC.add(c5 <= 0);
-	
+		nbCst=nbCst+2;
 	}
 
 	// contraintes 2c
@@ -141,7 +146,7 @@ int main(int argc, char** argv){
 		IloExpr c6(env);
 		c6 += flot[i].first + flot[i].second + edge[i] * (G._nbNodes -1);
 		CC.add(c6 <= (G._nbNodes -1));	
-
+		nbCst++;
 	}
 
 	//contraintes 2d
@@ -165,7 +170,7 @@ int main(int argc, char** argv){
 
 		}
 		CC.add(c7 >=1);
-
+		nbCst++;
 	}
 
 	
@@ -195,7 +200,13 @@ int main(int argc, char** argv){
     }
 	    env.out() << "Solution value  = " << cplex.getObjValue() << endl;
 		cout<<cplex.getNnodes() << "nb noeud"<<endl;
-    G.Write_sol_ps_pdf();
+   stat.nbNodes = cplex.getNnodes();
+	stat.optimalityGap = cplex.getMIPRelativeGap();
+	stat.end = clock();
+	stat.nbCst = nbCst;
+	stat.printInfo();
+	stat.writeFile(fResultName);
+
     cplex.end();
 	
 	}

@@ -3,6 +3,9 @@
 #include <vector>
 #include <cstdlib>
 #include "Graph.h"
+#include <ctime>
+#include "statStruct.h"
+#define fResultName "result.csv"
 #define epsilon 0.00001
 int main(int argc, char** argv){
 	IloEnv env;
@@ -19,10 +22,13 @@ int main(int argc, char** argv){
 		
 
 	G.MakeCplexVarFlot(env);
-	int nbcst = 0;
+	int nbCst = 0;
 	IloRangeArray CC(env);
 	IloExpr c1(env);
-
+	statStruct stat;
+    	stat.init();
+	stat.start = clock();
+	stat.formulation = "flot";
 
 	// constraintes de fortet
 
@@ -32,6 +38,7 @@ int main(int argc, char** argv){
 		c1+= G._nodes[(*itEdge)->_first]._s;
 		c1+= - G._nodes[(*itEdge)->_last]._s;
 		CC.add(c1 <= 0);
+		nbCst++;
 	}
 
 
@@ -41,6 +48,7 @@ int main(int argc, char** argv){
 		c1+= -G._nodes[(*itEdge)->_first]._s;
 		c1+=  G._nodes[(*itEdge)->_last]._s;
 		CC.add(c1 <= 0);
+		nbCst++;
 	}
 
 	for (list<Edge*>::iterator itEdge = G._edges.begin(); itEdge != G._edges.end(); itEdge++){
@@ -49,6 +57,7 @@ int main(int argc, char** argv){
 		c1+= -G._nodes[(*itEdge)->_first]._s;
 		c1+= -G._nodes[(*itEdge)->_last]._s;
 		CC.add(c1 <= 0);
+		nbCst++;
 	}
 
 
@@ -58,6 +67,7 @@ int main(int argc, char** argv){
 		c1+= G._nodes[(*itEdge)->_first]._s;
 		c1+=  G._nodes[(*itEdge)->_last]._s;
 		CC.add(c1 <= 2);
+		nbCst++;
 	}
 	//contraintes de flot v -> W, passant par le sommet u différent de v et w.
 
@@ -75,6 +85,7 @@ int main(int argc, char** argv){
 						}
 					}
 					CC.add(c1 == 0);
+					nbCst++;
 				}
 				
 
@@ -107,6 +118,8 @@ int main(int argc, char** argv){
 			c2+= -G._nodes[v]._s;
 			CC.add(c1 >= 1);
 			CC.add(c2 >= -1);
+			nbCst++;
+			nbCst++;
 			
 			
 			
@@ -136,6 +149,8 @@ int main(int argc, char** argv){
 			c2+= -G._nodes[v]._s;
 			CC.add(c1 >= 1);
 			CC.add(c2 >= -1);
+			nbCst++;
+			nbCst++;
 			
 			
 			
@@ -158,6 +173,7 @@ int main(int argc, char** argv){
 					c1 += (*itEdge->second).flotLF[u][v];
 				}
 				CC.add(c1 == 0);
+				nbCst++;
 			}
 			for (list<pair<int,Edge*>>::iterator itEdge = G._nodes[v]._incList.begin(); itEdge != G._nodes[v]._incList.end(); itEdge++){
 				IloExpr c2(env);
@@ -168,6 +184,7 @@ int main(int argc, char** argv){
 					c2 += (*itEdge->second).flotFL[u][v];
 				}
 				CC.add(c2 == 0);
+				nbCst++;
 			}
 			
 		}
@@ -187,7 +204,10 @@ int main(int argc, char** argv){
 				c2+= (*itEdge)->_x;
 				CC.add(c1 <=1);
 				CC.add(c2 <=1); 
+				nbCst++;
+				nbCst++;
 			}
+
 			
 		}
 	
@@ -224,7 +244,12 @@ int main(int argc, char** argv){
 	cout<< "sommet 2 : "<< cplex.getValue(G._nodes[2]._s) << endl;
 	cout<< "sommet 3 : "<< cplex.getValue(G._nodes[3]._s) << endl;
 	cout<< "sommet 4 : "<< cplex.getValue(G._nodes[4]._s) << endl;
-    G.Write_sol_ps_pdf();
+    stat.nbNodes = cplex.getNnodes();
+	stat.optimalityGap = cplex.getMIPRelativeGap();
+	stat.end = clock();
+	stat.nbCst = nbCst;
+	stat.printInfo();
+	stat.writeFile(fResultName);
     cplex.end();
 
 	}

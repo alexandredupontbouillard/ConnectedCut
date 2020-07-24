@@ -430,7 +430,6 @@ Graph Graph::copy(vector<int> & new_cost){ // return the graph necessary for the
 		i++;
 		
 	}
-
 	return result;
 	
 }*/

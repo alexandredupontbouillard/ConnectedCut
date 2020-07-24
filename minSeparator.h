@@ -9,6 +9,7 @@
 #include <vector>
 #include <cstdlib>
 #include "Graph.h"
+#include "ModelMinSeparator.h"
 
 
 #ifdef USING_CPLEX
@@ -18,7 +19,7 @@
 
 using namespace::std;
 
-list<IloRange> plMinSeparator(Graph & g, IloEnv env);
+list<IloRange> plMinSeparator(Graph & g, IloEnv env,ModelMinSeparator momo);
 list<IloRange> plMinSeparatorRandom(Graph & g, IloEnv env);
 
 #endif

@@ -10,7 +10,7 @@ void statStruct::computeTime(){
 
 	}
 	totalTime = (end - start)/CLOCKS_PER_SEC; 
-
+	
 }
 
 void statStruct::printInfo(){
@@ -29,7 +29,7 @@ void statStruct::printInfo(){
 	cout<<"total time : "<< totalTime << endl;
 	cout<<"nb nodes : "<< nbNodes << endl;
 	cout<<"optimality gap  : "<< optimalityGap << endl;
-
+	cout<<"nbCst At begining : "<< nbCst <<endl;
 
 }
 
@@ -37,7 +37,7 @@ void statStruct::writeFile(string s){
 
 	fstream fichier(s);
 	fichier.seekp(0,ios::end);//On se rend à la fin du fichier afin de ne pas effacer le contenu déjà présent
-	fichier <<totalTime<<";"<<nbNodes<<";"<<nbCuts[0]<<";" << temps[0]<< ";" << nbCuts[2] <<";" <<  temps[2]<< ";" << nbCuts[3]<< ";"  << temps[3] << ";;"<< endl;
+	fichier <<formulation << ";"<<totalTime<<";"<<nbNodes<<";"<<nbCuts[0]<<";" << temps[0]<< ";" << nbCuts[2] <<";" <<  temps[2]<< ";" << nbCuts[3]<< ";"  << temps[3] << ";"<< nbCst<<";;"<< endl;
 	fichier.close();
 
 

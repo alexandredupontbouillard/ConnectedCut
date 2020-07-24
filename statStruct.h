@@ -2,7 +2,7 @@
 #define INFOS_H
 
 #include <ilcplex/ilocplex.h>
-
+#include <string>
 using namespace::std;
 
 enum constType{ //enumerer les types de contraintes
@@ -18,10 +18,11 @@ struct statStruct{
   float temps[4];
   int nbNodes;
   float start;
+  string formulation;
   float end;
   float totalTime;
   float optimalityGap;
-
+  int nbCst;
   void init(){
 
 	//initialiser chacun des compteurs de contraintes générées

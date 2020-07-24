@@ -6,6 +6,7 @@
 #include <ctime>
 #include "minSeparator.h"	
 #include "Graph.h"
+#include "ModelMinSeparator.h"
 
 #define epsilon 0.00001
 #define fResultName "result.csv"
@@ -334,12 +335,15 @@ void cycleSep(Graph & G, Graph &Gp,
 }
 
 
-ILOLAZYCONSTRAINTCALLBACK5(GenLazyCut,
+ILOLAZYCONSTRAINTCALLBACK6(GenLazyCut,
 			   Graph &, G,
 			   Graph &, Gp,
 			   list<poolStruct>&, violatedConst,
 			   statStruct&, stat,
-			   bool, linRelax){
+			   bool, linRelax,
+				ModelMinSeparator&, momo){
+
+
   //cout << "******* Seperation phase ********" << endl;
   clock_t t;
   /* Checking the pool of violated constraints */
@@ -363,7 +367,7 @@ ILOLAZYCONSTRAINTCALLBACK5(GenLazyCut,
     cycleSep(G,Gp,getEnv(),violatedConst);
     t = clock()-t;
     stat.temps[CYCLE]+=t;
-    
+
 		/*t = clock();
    		W1W2Sep( G, getEnv(),violatedConst);
 		t = clock()-t;
@@ -371,7 +375,7 @@ ILOLAZYCONSTRAINTCALLBACK5(GenLazyCut,
 		*/
 
         t = clock();
-	list<IloRange> l = plMinSeparatorRandom(G,getEnv());
+	list<IloRange> l = plMinSeparator(G,getEnv(),momo);
 	t = clock()-t;
 	stat.temps[W1W2] += t;
 	list<IloRange>::const_iterator it;
@@ -409,13 +413,13 @@ ILOLAZYCONSTRAINTCALLBACK5(GenLazyCut,
 
 }
 
-ILOUSERCUTCALLBACK5(GenUserCut,
+ILOUSERCUTCALLBACK6(GenUserCut,
 			   Graph &, G,
 			   Graph &, Gp,
 			   list<poolStruct>&, violatedConst,
 			   statStruct&, stat,
-			   bool, linRelax){
-
+		           bool, linRelax,
+				ModelMinSeparator&, momo){
 	clock_t t;
 	if (!violatedConst.empty()){
 	    while (!violatedConst.empty()){
@@ -441,7 +445,9 @@ ILOUSERCUTCALLBACK5(GenUserCut,
 	
 	
 	t = clock();
-	list<IloRange> l = plMinSeparatorRandom(G,getEnv());
+	//list<IloRange> l = plMinSeparatorRandom(G,getEnv());
+	
+	list<IloRange> l = plMinSeparator(G,getEnv(),momo);
 	t = clock()-t;
 	stat.temps[W1W2] +=t;	
 
@@ -453,6 +459,10 @@ ILOUSERCUTCALLBACK5(GenUserCut,
       		newConst.ineq = *it;
       		newConst.type = W1W2;
 		violatedConst.push_back(newConst);
+		
+
+	
+	
 		
 
 	}
@@ -503,6 +513,8 @@ void PrintSolution(IloCplex cplex,
 
 
 
+
+
 int main(int argc, char** argv){
   
   IloEnv env;
@@ -517,7 +529,7 @@ int main(int argc, char** argv){
 	    
     statStruct stat;
     stat.init();
-
+    stat.formulation = "w1w2";
     Graph G(argv[1]);
     Graph Gp(2*G._nbNodes);
     list<poolStruct> violatedConst;
@@ -531,15 +543,16 @@ int main(int argc, char** argv){
     //cplex.use(CheckFeas(env,G,Gp,violatedConst,stat));
 
    stat.start = clock();
+	ModelMinSeparator momo(G);
 
     if ((argc >= 3) && (argv[2][0] == '0')){
       cout << "Computing linear relaxation" << endl;
-      cplex.use(GenLazyCut(env,G,Gp,violatedConst,stat,true)); 
+      cplex.use(GenLazyCut(env,G,Gp,violatedConst,stat,true,momo)); 
     } else {
-      cplex.use(GenLazyCut(env,G,Gp,violatedConst,stat,true));
+      cplex.use(GenLazyCut(env,G,Gp,violatedConst,stat,true,momo));
     }
-
-    cplex.use(GenUserCut(env,G,Gp,violatedConst,stat,true));
+    
+    cplex.use(GenUserCut(env,G,Gp,violatedConst,stat,true,momo));
     cplex.extract(model);
 
     char* file = new char[15];
@@ -576,7 +589,8 @@ int main(int argc, char** argv){
     //     cout << "Time Limit of " << TimeLimit / 3600.0 << " hours" << endl;
     //     cplex.setParam(IloCplex::TiLim,172800.0);
 
-	  
+
+
     cplex.solve();
     
     for (list<Edge*>::iterator itEdge = G._edges.begin(); itEdge != G._edges.end(); itEdge++){
@@ -586,13 +600,16 @@ int main(int argc, char** argv){
 	}
 	
     }
+	
     env.out() << "Solution value  = " << cplex.getObjValue() << endl;
     //G.Write_sol_ps_pdf();
 	stat.nbNodes = cplex.getNnodes();
 	stat.optimalityGap = cplex.getMIPRelativeGap();
 	stat.end = clock();
+	stat.nbCst= 0;
 	stat.printInfo();
 	stat.writeFile(fResultName);
+    
     cplex.end();
 
 	//récupération des données

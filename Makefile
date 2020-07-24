@@ -49,7 +49,7 @@ LEMONINCDIR = $(LEMONDIR)/include/lemon
 
 CCFLAGS = $(CCOPT) -I$(CPLEXINCDIR) -I$(CONCERTINCDIR) -I$(LEMONINCDIR)
 
-all:	MCCP_Tree_Form formulationFlot w1w2 
+all:	MCCP_Tree_Form formulationFlot w1w2 hojny_flot
 
 MCCP_Tree_Form: MCCP_Tree_Form.o Graph.o heap2k.o heap2k.h Graph.h 
 	$(CCC) $(CCFLAGS) MCCP_Tree_Form.o heap2k.o Graph.o -o MCCP_Tree_Form $(CCLNFLAGS)
@@ -57,21 +57,30 @@ MCCP_Tree_Form: MCCP_Tree_Form.o Graph.o heap2k.o heap2k.h Graph.h
 MCCP_Tree_Form.o: MCCP_Tree_Form.cpp Graph.h
 	$(CCC) -c $(CCFLAGS) MCCP_Tree_Form.cpp -o MCCP_Tree_Form.o
 
-w1w2: w1w2.o Graph.o heap2k.o heap2k.h Graph.h minSeparator.o statStruct.o statStruct.h 
-	$(CCC) $(CCFLAGS) w1w2.o heap2k.o Graph.o statStruct.o minSeparator.o -o w1w2 $(CCLNFLAGS)
+w1w2: w1w2.o Graph.o heap2k.o heap2k.h Graph.h minSeparator.o statStruct.o statStruct.h ModelMinSeparator.o ModelMinSeparator.h
+	$(CCC) $(CCFLAGS) w1w2.o   heap2k.o Graph.o statStruct.o minSeparator.o  ModelMinSeparator.o -o w1w2 $(CCLNFLAGS)
 
-w1w2.o: w1w2.cpp Graph.h minSeparator.h statStruct.h
+w1w2.o: w1w2.cpp Graph.h minSeparator.h statStruct.h ModelMinSeparator.h 
 	$(CCC) -c $(CCFLAGS) w1w2.cpp -o w1w2.o
 
+ModelMinSeparator.o: ModelMinSeparator.cpp ModelMinSeparator.h Graph.h 
+	$(CCC) -c $(CCFLAGS) ModelMinSeparator.cpp -o ModelMinSeparator.o
 
-minSeparator.o : minSeparator.cpp Graph.h minSeparator.h
+
+minSeparator.o : minSeparator.cpp Graph.h minSeparator.h ModelMinSeparator.h
 	$(CCC) -c  $(CCFLAGS) $(CCLNDIRS)  minSeparator.cpp -o minSeparator.o
 
-formulationFlot:formulationFlot.o Graph.o heap2k.o heap2k.h Graph.h 
-	$(CCC) $(CCFLAGS) formulationFlot.o heap2k.o Graph.o -o formulationFlot $(CCLNFLAGS)
+formulationFlot:formulationFlot.o Graph.o heap2k.o heap2k.h Graph.h  statStruct.o statStruct.h
+	$(CCC) $(CCFLAGS) formulationFlot.o heap2k.o Graph.o statStruct.o -o formulationFlot $(CCLNFLAGS)
 
-formulationFlot.o: formulationFlot.cpp Graph.h
+formulationFlot.o: formulationFlot.cpp Graph.h statStruct.h
 	$(CCC) -c $(CCFLAGS) formulationFlot.cpp -o formulationFlot.o
+
+hojny_flot:hojny_flot.o Graph.o heap2k.o heap2k.h Graph.h statStruct.o statStruct.h
+	$(CCC) $(CCFLAGS) hojny_flot.o heap2k.o Graph.o statStruct.o -o hojny_flot $(CCLNFLAGS)
+
+hojny_flot.o: hojny_flot.cpp Graph.h statStruct.h
+	$(CCC) -c $(CCFLAGS) hojny_flot.cpp -o hojny_flot.o
 
 heap2k.o: heap2k.cpp heap2k.h Graph.h
 	$(CCC) -c $(CCFLAGS) heap2k.cpp -o heap2k.o

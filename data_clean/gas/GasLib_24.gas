@@ -1,0 +1,32 @@
+c FILE: GasLib_24
+
+c SOURCE: From gaslib.zib.de
+
+c DESCRIPTION: Gas network with 24 nodes.
+
+p edge 24 25
+e 1 3
+e 2 9
+e 3 10
+e 9 10
+e 10 11
+e 11 12
+e 12 13
+e 13 15
+e 13 16
+e 14 17
+e 15 14
+e 16 8
+e 16 14
+e 17 4
+e 17 18
+e 18 19
+e 19 20
+e 19 21
+e 20 23
+e 21 22
+e 21 23
+e 22 5
+e 23 24
+e 24 6
+e 24 7
