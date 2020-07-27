@@ -23,7 +23,7 @@ class ModelMinSeparator{
 	 list<IloNumVar> edges;
 	 IloModel model;
 	 IloEnv env1;
-
+	 IloObjective obj;
 
 
 	ModelMinSeparator(Graph & G);

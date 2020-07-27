@@ -12,10 +12,10 @@ using namespace::std;
 
 
 ModelMinSeparator::ModelMinSeparator(Graph & g):  constrPos(g._nbNodes), constrNeg(g._nbNodes){
-	IloEnv env;
+	IloEnv env1;
 	IloModel model(env1);
 	
-	
+	obj=IloAdd(model, IloMaximize(env1, 0.0));
 	list<Edge*>::const_iterator it;
 
 	///VARIABLES
@@ -78,7 +78,6 @@ void ModelMinSeparator :: add(int  a, int  b){
 	CC.add(constrPos[a]);
 
 	CC.add(constrNeg[b]);
-
 	
 
 	
@@ -92,15 +91,15 @@ void ModelMinSeparator :: deleta(int a, int b){
 
 	//cplex.delete(constrPos[a]);
 	//cplex.delete(constrNeg[b]);
-	constrPos[a].removeFromAll();
+	 constrPos[a].removeFromAll();
 
 	constrNeg[b].removeFromAll();
 
 }
 
-void modifyObj(){
 
 
 
 
-}
+
+

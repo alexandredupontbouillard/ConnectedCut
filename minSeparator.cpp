@@ -174,22 +174,20 @@ list<IloRange> plMinSeparator(Graph & g, IloEnv env, ModelMinSeparator momo){ //
 			
 				momo.add(k,z);
 			
-			  	//OBJ
-				IloExpr obj(momo.env1);
-
+			  	
 				
-				//IloObjective obj=IloAdd(momo.model, IloMinimize(momo.env1, 0.0));
+
 					
 				list<Edge*>::iterator itt ;
 
 				it2 =momo.edges.begin(); 
 				for (itt=g._edges.begin();itt!=g._edges.end();itt++){
-					obj+= (*it2) * (1- (*itt)->_valx);
+					momo.obj.setLinearCoef( (*it2) , (1- (*itt)->_valx));
 					
 			                it2++;	
 	 		  	}
 				
-				momo.model.add(IloMinimize(momo.env1,obj));
+				momo.model.add(momo.obj);
 				cout<<"kokookokokokokokokok"<<endl;
 				if ( !momo.cplex.solve() ) {
 				 momo.env1.error() << "Failed to optimize LP" << endl;
