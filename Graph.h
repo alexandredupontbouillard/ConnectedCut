@@ -39,6 +39,9 @@ class Edge{
   vector<vector<IloNumVar>> flotFL;
   vector<vector<IloNumVar>> flotLF; 
 #endif
+	
+  //pour la séparation gloutonne
+  bool aCheval; // vrai si l'arête est adjacente à un Wi
 
   Edge();
   Edge(const int & id,
@@ -83,6 +86,14 @@ class Node {
   bool visited;
   void Print();
 
+
+
+  // pour la séparation gloutonne
+
+  bool adjW1;
+  bool adjW2;
+  double val();
+
   #ifdef USING_CPLEX
   IloNumVar _s;
   #endif
@@ -125,6 +136,9 @@ class Graph{
   //Graph copy(vector<int> new_cost)();
 
   double Dijkstra(int s, int t, vector<int>&T, vector<double>&D, vector<int>&card, heap &H);
+
+
+  void gloutInit();
 
 
 #ifdef USING_CPLEX

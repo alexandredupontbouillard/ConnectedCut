@@ -11,9 +11,13 @@ using namespace::std;
 
 
 
-ModelMinSeparator::ModelMinSeparator(Graph & g):  constrPos(g._nbNodes), constrNeg(g._nbNodes){
+ModelMinSeparator::ModelMinSeparator(Graph & g){
 	IloEnv env1;
 	IloModel model(env1);
+
+
+	constrPos.resize(g._nbNodes);
+	constrNeg.resize(g._nbNodes);
 	
 	obj=IloAdd(model, IloMaximize(env1, 0.0));
 	list<Edge*>::const_iterator it;
@@ -21,15 +25,22 @@ ModelMinSeparator::ModelMinSeparator(Graph & g):  constrPos(g._nbNodes), constrN
 	///VARIABLES
 	vector<IloNumVar>  vertice ; 
 	vertice.resize(g._nbNodes);
-
 	
 
 	for(int i = 0 ; i < vertice.size() ; i ++){
 		vertice[i] = IloNumVar(env1, - 1.0, 1.0, ILOFLOAT);
+		ostringstream varname;
+		varname.str("");
+		varname<<"y_"<<i;
+		vertice[i].setName(varname.str().c_str());
 	}
 
 	for (it=g._edges.begin();it!=g._edges.end();it++){
 		edges.push_back(IloNumVar(env1, 0.0, 1.0, ILOFLOAT));
+		ostringstream varname;
+		varname.str("");
+		varname<<"z_"<<(*it)->_first<<"_"<<(*it)->_last;
+		edges.back().setName(varname.str().c_str());
 	}
 
 	//CONSTRAINTS
@@ -77,12 +88,7 @@ void ModelMinSeparator :: add(int  a, int  b){
 
 	CC.add(constrPos[a]);
 
-	CC.add(constrNeg[b]);
-	
-
-	
-
-
+	CC.add(constrNeg[b]);	
 
 }
 

@@ -19,7 +19,8 @@
 
 using namespace::std;
 
-list<IloRange> plMinSeparator(Graph & g, IloEnv env,ModelMinSeparator momo);
+list<IloRange> plMinSeparator(Graph & g, IloEnv env,ModelMinSeparator & momo);
 list<IloRange> plMinSeparatorRandom(Graph & g, IloEnv env);
+void gloutGlout(Graph & g, IloEnv env, list<IloRange> & violatedConst);
 
 #endif

@@ -142,7 +142,7 @@ bool ComparePtEdgeXY(Edge * edg1, Edge * edg2){
 
 void W1W2Sep(Graph &G, IloEnv env,
 		list<poolStruct> & violatedConst){
-
+	
 	vector<int> v(G._edges.size());
 	Graph test3Cut(G._nbNodes);
 	int i = 0;
@@ -152,8 +152,10 @@ void W1W2Sep(Graph &G, IloEnv env,
 		i++;
 		}
 	}
+	
 
 	if(not test3Cut.connected()){
+		
 		IloExpr Laclhs(env);
 		int f = 0;
 		for( list<Edge*>::iterator itEdge = G._edges.begin(); itEdge != G._edges.end(); itEdge++){
@@ -167,6 +169,7 @@ void W1W2Sep(Graph &G, IloEnv env,
 	         newConst.type = W1W2I;
 	         violatedConst.push_back(newConst);
 	}
+	
 
 }
 
@@ -191,54 +194,42 @@ void createGp(Graph &G, Graph &Gp){
 }
 
 
-void extract_elementary_cycle(list<pair<pair<int,int>,int> > &L,int n){ 
-  int i,mini;
-  vector<int> markl(n,-1);
-  vector<int> markr(n,-1);
+// Recherche le plus petit cycle a l'interieur de l'inegalite
+void extract_elementary_cycle(list<pair<pair<int,int>,int> > &L,int n){
+  int i;
   list<pair<pair<int,int>,int> >::iterator itL;
+ 
+  vector<pair<bool, list<pair<pair<int,int>,int> >::iterator> > mark;
+  mark.resize(n);
+  for (i=0;i<n;i++) mark[i].first=false;
 
-  // On cherche le plus petit intervalle dans la liste car il n'a pas d'intervalle imbrique
-  // donc c est une cte valide tres petite en nb d arete
-  // Remarquons qu un sommet apparait au plus 2 fois
-  // On parcourt de gauche a droite pour trouver la 1ere occurence
-  // Idem de droite a gauche
-
-  itL=L.begin();
-  markl[(*itL).first.first]=0;
-  i=1;
-  while(itL!=L.end()){
-    if (markl[(*itL).first.second]==-1)
-      markl[(*itL).first.second]=i;
-    itL++;
-    i++;
-  }
-
-  itL=L.end();
-  itL--;
-  markr[(*itL).first.second]=n-1;
-  i=n-2;
-  do{
-    itL--;
-    if (markr[(*itL).first.first]==-1)
-      markr[(*itL).first.first]=i;
-    i--;
-  }while(itL!=L.begin());
-
-  mini=0;
-  for(i=1;i<n;i++){
-    if ( (markl[i]!=markr[i]) && (markr[i]-markl[i]<markr[mini]-markl[mini]) )
-      mini=i;
-  }
+  #ifdef _OUTPUT_
+  cout<<"avt: ";
+  for (itL=L.begin();itL!=L.end();itL++)
+    cout<<"("<<(*itL).second<<", ("<<(*itL).first.first<<","<<(*itL).first.second<<")) ";
+  cout<<endl;
+  #endif
 
   itL=L.begin();
-  for (i=0;i<markl[mini];i++) itL++;
-  L.erase(L.begin(),itL);
-
-  itL=L.end();
-  itL--;
-  for (i=n-1;i>markr[mini];i++) itL--;
+  mark[(*itL).first.first].first=1;
+  mark[(*itL).first.first].second=itL;
+  while ( (itL!=L.end()) && (!mark[(*itL).first.second].first) ){
+      mark[(*itL).first.second].first=1;
+      mark[(*itL).first.second].second=itL;
+      itL++;
+  }
+  L.erase(L.begin(),mark[(*itL).first.second].second);
+  itL++;
   L.erase(itL,L.end());
 
+  #ifdef _OUTPUT_
+  cout<<"apr: ";
+  for (itL=L.begin();itL!=L.end();itL++)
+    cout<<"("<<(*itL).second<<", ("<<(*itL).first.first<<","<<(*itL).first.second<<")) ";
+  cout<<endl;
+  #endif
+
+  
 }
 
 
@@ -305,7 +296,7 @@ void cycleSep(Graph & G, Graph &Gp,
       // cout<<endl;
       // cin>>u;
 
-      // A VALIDER!!! extract_elementary_cycle(L,G._nbNodes);
+      extract_elementary_cycle(L,G._nbNodes);
 
       /* Translate into a cplex cste */
 
@@ -320,12 +311,13 @@ void cycleSep(Graph & G, Graph &Gp,
 	  F++;
 	}
       }
-      //      cout<<Laclhs;
       poolStruct newConst;
       newConst.ineq = IloRange(Laclhs <= F - 1);
       newConst.type = CYCLE;
       violatedConst.push_back(newConst);
-
+      #ifdef _OUTPUT_
+      cout<< newConst.ineq << endl;
+      #endif
      
     }
  
@@ -333,7 +325,6 @@ void cycleSep(Graph & G, Graph &Gp,
 
 
 }
-
 
 ILOLAZYCONSTRAINTCALLBACK6(GenLazyCut,
 			   Graph &, G,
@@ -368,25 +359,21 @@ ILOLAZYCONSTRAINTCALLBACK6(GenLazyCut,
     t = clock()-t;
     stat.temps[CYCLE]+=t;
 
-		/*t = clock();
-   		W1W2Sep( G, getEnv(),violatedConst);
-		t = clock()-t;
-		stat.temps[W1W2I] += t;
-		*/
 
+
+	
         t = clock();
+
+	//list<IloRange> l = plMinSeparatorRandom(G,getEnv());
+	
 	list<IloRange> l = plMinSeparator(G,getEnv(),momo);
 	t = clock()-t;
 	stat.temps[W1W2] += t;
-	list<IloRange>::const_iterator it;
-	for(it = l.begin(); it != l.end() ; it++){
-		poolStruct newConst;
-      		newConst.ineq = *it;
-      		newConst.type = W1W2;
-		violatedConst.push_back(newConst);
-		
-
-
+	
+	while(!l.empty()){
+		add(l.front(),IloCplex::UseCutPurge);
+		l.pop_front();
+		stat.nbCuts[W1W2]++;
 	}
 
 
@@ -445,26 +432,21 @@ ILOUSERCUTCALLBACK6(GenUserCut,
 	
 	
 	t = clock();
+
 	//list<IloRange> l = plMinSeparatorRandom(G,getEnv());
-	
+
 	list<IloRange> l = plMinSeparator(G,getEnv(),momo);
 	t = clock()-t;
 	stat.temps[W1W2] +=t;	
-
-
-
-	list<IloRange>::const_iterator it;
-	for(it = l.begin(); it != l.end() ; it++){
-		poolStruct newConst;
-      		newConst.ineq = *it;
-      		newConst.type = W1W2;
-		violatedConst.push_back(newConst);
-		
+	
 
 	
-	
-		
 
+
+	while(!l.empty()){
+		add(l.front(),IloCplex::UseCutPurge);
+		l.pop_front();
+		stat.nbCuts[W1W2]++;
 	}
 	
 	
@@ -478,6 +460,229 @@ ILOUSERCUTCALLBACK6(GenUserCut,
 	      stat.nbCuts[violatedConst.front().type]++;
 	      violatedConst.pop_front();
 	    }
+
+
+	}
+
+
+}
+
+
+
+
+
+
+ILOLAZYCONSTRAINTCALLBACK6(SimpleLazyCut,
+			   Graph &, G,
+			   Graph &, Gp,
+			   list<poolStruct>&, violatedConst,
+			   statStruct&, stat,
+			   bool, linRelax,
+				ModelMinSeparator&, momo){
+
+
+  //cout << "******* Seperation phase ********" << endl;
+  clock_t t;
+  /* Checking the pool of violated constraints */
+  if (!violatedConst.empty()){
+    while (!violatedConst.empty()){
+      add(violatedConst.front().ineq,IloCplex::UseCutPurge);
+      stat.nbCuts[violatedConst.front().type]++;
+      // cout << "Adding " << violatedConst.front().type << " constraint" << endl;
+      violatedConst.pop_front();
+    }
+  } else {
+
+    /* Retrieving x and y values */
+    for (list<Edge*>::iterator itEdge = G._edges.begin(); itEdge != G._edges.end(); itEdge++){
+      (*itEdge)->_valx = getValue((*itEdge)->_x);
+	
+    }
+
+    /* Check Cycle inequalities */
+    t = clock();
+    cycleSep(G,Gp,getEnv(),violatedConst);
+    t = clock()-t;
+    stat.temps[CYCLE]+=t;
+
+
+
+	cout<<"separation entière O(n)"<<endl;
+	t = clock();
+	W1W2Sep( G, getEnv(),violatedConst);
+	
+	t = clock()-t;
+	stat.temps[W1W2I] += t;
+		
+	cout<<"separation entière O(n) finie"<<endl;
+
+
+
+
+    while (!violatedConst.empty()){
+      // cout << "Adding constraint : " << violatedConst.front().ineq << endl;
+      add(violatedConst.front().ineq,IloCplex::UseCutPurge);
+      stat.nbCuts[violatedConst.front().type]++;
+      violatedConst.pop_front();
+    }
+
+
+  }
+
+}
+
+ILOUSERCUTCALLBACK6(GloutUserCut,
+			   Graph &, G,
+			   Graph &, Gp,
+			   list<poolStruct>&, violatedConst,
+			   statStruct&, stat,
+		           bool, linRelax,
+				ModelMinSeparator&, momo){
+	clock_t t;
+	if (!violatedConst.empty()){
+		while (!violatedConst.empty()){
+		  add(violatedConst.front().ineq,IloCplex::UseCutPurge);
+		  stat.nbCuts[violatedConst.front().type]++;
+		  // cout << "Adding " << violatedConst.front().type << " constraint" << endl;
+		  violatedConst.pop_front();
+		}
+	  } 
+	else {
+
+		/* Retrieving x values */
+		for (list<Edge*>::iterator itEdge = G._edges.begin(); itEdge != G._edges.end(); itEdge++){
+		  (*itEdge)->_valx = getValue((*itEdge)->_x);
+		
+		}
+
+		/* Check Cycle inequalities */
+		t = clock();
+		cycleSep(G,Gp,getEnv(),violatedConst);
+		t = clock()-t;
+		stat.temps[CYCLE]+= t;
+
+
+
+		t = clock();
+
+		list<IloRange> l;
+		gloutGlout(G,getEnv(), l);
+		t = clock()-t;
+		stat.temps[GLOUTON] +=t;
+
+
+
+
+
+		while(!l.empty()){
+			add(l.front(),IloCplex::UseCutPurge);
+			l.pop_front();
+			stat.nbCuts[GLOUTON]++;
+		}
+
+
+
+
+
+
+		 while (!violatedConst.empty()){
+			  // cout << "Adding constraint : " << violatedConst.front().ineq << endl;
+			  add(violatedConst.front().ineq,IloCplex::UseCutPurge);
+			  stat.nbCuts[violatedConst.front().type]++;
+			  violatedConst.pop_front();
+		}
+
+
+	}
+
+
+}
+
+
+ILOUSERCUTCALLBACK6(GloutExactUserCut,
+			   Graph &, G,
+			   Graph &, Gp,
+			   list<poolStruct>&, violatedConst,
+			   statStruct&, stat,
+		           bool, linRelax,
+				ModelMinSeparator&, momo){
+	clock_t t;
+	if (!violatedConst.empty()){
+		while (!violatedConst.empty()){
+		  add(violatedConst.front().ineq,IloCplex::UseCutPurge);
+		  stat.nbCuts[violatedConst.front().type]++;
+		  // cout << "Adding " << violatedConst.front().type << " constraint" << endl;
+		  violatedConst.pop_front();
+		}
+	  } 
+	else {
+
+		/* Retrieving x values */
+		for (list<Edge*>::iterator itEdge = G._edges.begin(); itEdge != G._edges.end(); itEdge++){
+		  (*itEdge)->_valx = getValue((*itEdge)->_x);
+		
+		}
+
+		/* Check Cycle inequalities */
+		t = clock();
+		cycleSep(G,Gp,getEnv(),violatedConst);
+		t = clock()-t;
+		stat.temps[CYCLE]+= t;
+
+
+
+		t = clock();
+
+		list<IloRange> l;
+		gloutGlout(G,getEnv(), l);
+		t = clock()-t;
+		stat.temps[GLOUTON] +=t;
+
+		if(l.size()==0){
+
+			t = clock();
+		    l = plMinSeparatorRandom(G,getEnv());
+		
+			//list<IloRange> l = plMinSeparator(G,getEnv(),momo);
+			t = clock()-t;
+			stat.temps[W1W2] +=t;	
+		
+			while(!l.empty()){
+				add(l.front(),IloCplex::UseCutPurge);
+				l.pop_front();
+				stat.nbCuts[W1W2]++;
+		
+			}
+
+
+		}
+		else{
+			while(!l.empty()){
+				add(l.front(),IloCplex::UseCutPurge);
+				l.pop_front();
+				stat.nbCuts[GLOUTON]++;
+			}
+
+
+
+		}
+
+
+
+
+		
+
+
+
+
+
+
+		 while (!violatedConst.empty()){
+			  // cout << "Adding constraint : " << violatedConst.front().ineq << endl;
+			  add(violatedConst.front().ineq,IloCplex::UseCutPurge);
+			  stat.nbCuts[violatedConst.front().type]++;
+			  violatedConst.pop_front();
+		}
 
 
 	}
@@ -533,7 +738,7 @@ int main(int argc, char** argv){
     Graph G(argv[1]);
     Graph Gp(2*G._nbNodes);
     list<poolStruct> violatedConst;
-
+    char * w1w2 = argv[2]; 
     createGp(G,Gp);
 
     StateModel(model, G);
@@ -545,14 +750,29 @@ int main(int argc, char** argv){
    stat.start = clock();
 	ModelMinSeparator momo(G);
 
-    if ((argc >= 3) && (argv[2][0] == '0')){
-      cout << "Computing linear relaxation" << endl;
-      cplex.use(GenLazyCut(env,G,Gp,violatedConst,stat,true,momo)); 
-    } else {
-      cplex.use(GenLazyCut(env,G,Gp,violatedConst,stat,true,momo));
-    }
-    
-    cplex.use(GenUserCut(env,G,Gp,violatedConst,stat,true,momo));
+	if( strcmp(w1w2,"0")==0){     // lazy PL, User PL
+		cplex.use(GenLazyCut(env,G,Gp,violatedConst,stat,true,momo));
+	   
+	    
+	    cplex.use(GenUserCut(env,G,Gp,violatedConst,stat,true,momo));
+
+	}else if( strcmp(w1w2,"0")==1){  // lazy BFS, User Glout
+
+		cplex.use(SimpleLazyCut(env,G,Gp,violatedConst,stat,true,momo));
+	   
+	    
+	    cplex.use(GloutUserCut(env,G,Gp,violatedConst,stat,true,momo));
+
+	}else{  //lazy BFS, User Glout puis PL si glout ne génère rien
+
+
+		cplex.use(SimpleLazyCut(env,G,Gp,violatedConst,stat,true,momo));
+	   
+	    
+	    cplex.use(GloutExactUserCut(env,G,Gp,violatedConst,stat,true,momo));
+
+	}
+
     cplex.extract(model);
 
     char* file = new char[15];

@@ -24,7 +24,7 @@ int main(int argc, char** argv){
 	int nbCst= 0;
 	statStruct stat;
     	stat.init();
-	stat.start = clock();
+	
 	stat.formulation = "hojnyFlot";
 	IloRangeArray CC(env);
 	IloExpr c1(env);
@@ -36,7 +36,7 @@ int main(int argc, char** argv){
 
 	vector<pair<IloNumVar,IloNumVar>> flot(G._edges.size());  // arête uv  -->  pair<uv,vu>
 	//initialisation des variables
-
+	stat.start = clock();
 	for(int i = 0 ; i < G._nbNodes ; i ++){
 		sommets[i] = make_pair(IloNumVar(env, 0.0, 1.0, IloNumVar::Int,""),IloNumVar(env, 0.0, 1.0, IloNumVar::Int,""))  ;
 
@@ -182,7 +182,7 @@ int main(int argc, char** argv){
 	
     // And Finally
     IloCplex cplex(model);
-	cout<<"yo7"<<endl;
+	
 
 	IloObjective obj=IloAdd(model, IloMaximize(env, 0.0));
 	i = 0;	
@@ -199,12 +199,15 @@ int main(int argc, char** argv){
 	i++;
     }
 	    env.out() << "Solution value  = " << cplex.getObjValue() << endl;
-		cout<<cplex.getNnodes() << "nb noeud"<<endl;
-   stat.nbNodes = cplex.getNnodes();
-	stat.optimalityGap = cplex.getMIPRelativeGap();
+
 	stat.end = clock();
+   	stat.nbNodes = cplex.getNnodes();
+	stat.optimalityGap = cplex.getMIPRelativeGap();
+	
 	stat.nbCst = nbCst;
 	stat.printInfo();
+
+
 	stat.writeFile(fResultName);
 
     cplex.end();

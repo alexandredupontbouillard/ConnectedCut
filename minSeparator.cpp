@@ -7,11 +7,10 @@
 #include "minSeparator.h"
 #include "Graph.h"
 #include <algorithm>
-
 #include "ModelMinSeparator.h"
 #define epsilon 0.00001
 #define precision 1000
-#define maxCst 200
+#define MAXCST 200
 
 
 
@@ -137,7 +136,7 @@ list<IloRange> plMinSeparatorRandom(Graph & g, IloEnv env){ //
 						
 					}
 					env1.end();
-					if(nbCst >= maxCst ){
+					if(nbCst >= MAXCST){
 							return result;
 						}	
 				}
@@ -154,11 +153,17 @@ list<IloRange> plMinSeparatorRandom(Graph & g, IloEnv env){ //
 }
 
 
-list<IloRange> plMinSeparator(Graph & g, IloEnv env, ModelMinSeparator momo){ // 
+list<IloRange> plMinSeparator(Graph & g, IloEnv env, ModelMinSeparator& momo){ // 
 	
 	
 	list<IloRange> result;
 	int nbCst = 0;
+
+	#ifdef _OUTPUT_
+	cout<<"Deb plMinSep"<<endl;
+	#endif
+
+	
 	for(int k= 0 ; k < g._nbNodes ; k ++){
 		for(int z = 0; z < k; z ++){
 			
@@ -173,22 +178,25 @@ list<IloRange> plMinSeparator(Graph & g, IloEnv env, ModelMinSeparator momo){ //
 			if(b){
 			
 				momo.add(k,z);
-			
-			  	
-				
-
-					
+						  				      					
 				list<Edge*>::iterator itt ;
 
-				it2 =momo.edges.begin(); 
+				it2 =momo.edges.begin();
+				cout<<endl<<"plmin: ";
 				for (itt=g._edges.begin();itt!=g._edges.end();itt++){
-					momo.obj.setLinearCoef( (*it2) , (1- (*itt)->_valx));
+				  cout<<" | "<<(*it2)<<" "<<(1- (*itt)->_valx);
+				  momo.obj.setLinearCoef( (*it2) , (1- (*itt)->_valx));
 					
 			                it2++;	
-	 		  	}
+	 		  	}				
+				//cout<<"kikiikiki"<<endl;
+				//	momo.model.add(momo.obj);
+				//cout<<"kokookokokokokokokok"<<endl;
 				
-				momo.model.add(momo.obj);
-				cout<<"kokookokokokokokokok"<<endl;
+ 				 momo.cplex.exportModel("sortie.lp");
+  // int y;
+  // cin>>y;
+				
 				if ( !momo.cplex.solve() ) {
 				 momo.env1.error() << "Failed to optimize LP" << endl;
 				    exit(1);
@@ -199,6 +207,7 @@ list<IloRange> plMinSeparator(Graph & g, IloEnv env, ModelMinSeparator momo){ //
 				
 			
 				if( momo.cplex.getObjValue()<2 ){
+					
 					int nbVar= 0;
 					nbCst += 1;
 					IloExpr Laclhs(env);
@@ -216,7 +225,7 @@ list<IloRange> plMinSeparator(Graph & g, IloEnv env, ModelMinSeparator momo){ //
 					
 				}
 				
-				if(nbCst >= maxCst ){
+				if(nbCst >= MAXCST ){
 						return result;
 					}
 				momo.deleta(k,z);	
@@ -227,8 +236,264 @@ list<IloRange> plMinSeparator(Graph & g, IloEnv env, ModelMinSeparator momo){ //
 
 
 	}
+
+        #ifdef _OUTPUT_
+	cout<<"Fin plMinSep"<<endl;
+	#endif
+
 	
 	return result;
+
+
+}
+
+
+
+void gloutGlout(Graph & g, IloEnv env, list<IloRange> & violatedConst){
+
+	list<int> w1;
+	list<int> w2;
+	list<int> adjW1;
+	list<int> adjW2;
+	bool b1; // l'ensemble w1 ne peut pas être amélioré localement
+	int  cost = 0;
+
+	
+	bool b2; //l'ensemble w2 ne peut pas être amélioré localement
+	bool klm = true;
+	int nbCst = 0;
+	for(int k= 0 ; k < g._nbNodes  ; k ++){
+		for(int z = 0; z < k; z ++){
+			
+			bool b = true ;
+			list<pair<int,Edge*> >::iterator it;
+			
+			for(it = g._nodes[k]._incList.begin(); it != g._nodes[k]._incList.end();it ++){
+				if(it->first == z){
+					b=false;
+				}
+			}
+			if(b and klm){
+				w1.push_back(k);
+				w2.push_back(z);
+				list<pair<int,Edge*> >::iterator it ;
+				g.gloutInit();
+
+				for(it = g._nodes[k]._incList.begin() ; it != g._nodes[k]._incList.end(); it ++){
+
+					adjW1.push_back((*it).first);
+					g._nodes[(*it).first].adjW1 = true;
+					(*it).second->aCheval = true;
+					cost += (*it).second->_valx;
+		
+
+
+				}
+				for(it = g._nodes[z]._incList.begin() ; it != g._nodes[z]._incList.end(); it ++){
+		
+					adjW2.push_back((*it).first);	
+					g._nodes[(*it).first].adjW2 = true;
+					(*it).second->aCheval = true;
+					cost += (*it).second->_valx;
+				}
+
+				b1 = true;
+				b2 = true;
+
+				while( b1 or b2){
+					
+					if(b1){
+						b1=false;  // si un noeud est ajouté dans W1 ce booléen devra repasser à true
+						list<int>::iterator itt;
+						int minIndice= -1;
+						float min =0;
+						int v;
+						for(itt = adjW1.begin() ; itt != adjW1.end(); itt ++){
+							
+
+
+
+
+							if(    g._nodes[*itt].adjW1 and not g._nodes[*itt].adjW2     ) {
+						       
+
+
+
+							 // si le noeud n'est pas adjacent à w1 ET w2 en même temps (sinon il est forcément dans le séparateur)
+								
+
+
+								v = g._nodes[*itt].val();
+							
+
+								if( min >= v) {
+									minIndice  = *itt;
+									min = v;
+									
+								}
+
+								
+
+							}
+
+						
+						}
+						if(minIndice != -1){ // un noeud peut être ajouté dans W1
+					
+							b1 = true;
+							adjW1.remove(minIndice);
+							w1.push_back(minIndice);
+
+							
+							for(it = g._nodes[minIndice]._incList.begin() ; it != g._nodes[minIndice]._incList.end(); it ++){
+								
+								if((*it).second->aCheval){
+									cost = cost - (*it).second->_valx;
+									(*it).second->aCheval = false;
+								}
+								else{
+									
+									(*it).second->aCheval = true;
+									cost = cost + (*it).second->_valx;
+									
+									if(not g._nodes[(*it).first].adjW1){
+										g._nodes[(*it).first].adjW1 = true;
+										adjW1.push_back((*it).first);
+
+									}
+								}
+							
+
+							}
+
+
+						}
+
+
+					}
+					else if (b2){
+
+
+						b2=false;  // si un noeud est ajouté dans W2 ce booléen devra repasser à true
+						list<int>::iterator itt;
+						int minIndice= -1;
+						float min =0;
+						int v;
+						for(itt = adjW2.begin() ; itt != adjW2.end(); itt ++){
+							
+
+
+
+
+							if(   g._nodes[*itt].adjW2 and not g._nodes[*itt].adjW1) {
+						       
+
+
+
+							 // si le noeud n'est pas adjacent à w1 ET w2 en même temps (sinon il est forcément dans le séparateur)
+								
+
+
+								v = g._nodes[*itt].val();
+							
+
+								if( min >= v) {
+									minIndice  = *itt;
+									min = v;
+									
+								}
+
+								
+
+							}
+
+						
+						}
+						if(minIndice != -1){ // un noeud peut être ajouté dans W2
+					
+							b2 = true;
+							adjW2.remove(minIndice);
+							w2.push_back(minIndice);
+
+							
+							for(it = g._nodes[minIndice]._incList.begin() ; it != g._nodes[minIndice]._incList.end(); it ++){
+								
+								if((*it).second->aCheval){
+									cost = cost - (*it).second->_valx;
+									(*it).second->aCheval = false;
+
+								}
+								else{
+									
+									(*it).second->aCheval = true;
+									cost = cost + (*it).second->_valx;
+									g._nodes[(*it).first].adjW2 = true;
+								}
+							
+
+							}
+
+
+						}
+
+
+
+					}
+
+				}
+
+				
+				if(cost <2){ //la contrainte associée est violée on va donc construire la contrainte puis l'ajouter dans violatedConst
+					int n = 0;
+					IloExpr cst(env);
+					list<Edge*>::iterator l;
+					for(l = g._edges.begin(); l != g._edges.end(); l ++){
+
+						if( (*l)->aCheval){
+							n++;
+							cst+= (*l)->_x;
+
+						}
+						
+
+					}
+					violatedConst.push_back(IloRange(cst <= n-2));
+					nbCst ++;
+					if(nbCst == MAXCST){
+						klm=false;
+
+					}
+					
+
+				}
+
+				
+
+
+
+
+			
+				w1.clear();
+				w2.clear();
+				adjW1.clear();
+				adjW2.clear();
+	
+				
+					
+			}
+		
+		
+		}
+
+
+	}
+
+	
+	
+
+
+	
+
 
 
 }

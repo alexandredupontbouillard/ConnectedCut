@@ -9,13 +9,14 @@ enum constType{ //enumerer les types de contraintes
   CYCLE,
   LACROIX,
   W1W2,  
-  W1W2I
+  W1W2I,
+  GLOUTON
 };
 
 struct statStruct{
   /* nb of generated cuts in the order of enum constType */
-  int nbCuts[4];
-  float temps[4];
+  int nbCuts[5];
+  float temps[5];
   int nbNodes;
   float start;
   string formulation;
@@ -23,6 +24,8 @@ struct statStruct{
   float totalTime;
   float optimalityGap;
   int nbCst;
+  float bestObj;
+  float bestInteger;
   void init(){
 
 	//initialiser chacun des compteurs de contraintes générées
@@ -31,12 +34,14 @@ struct statStruct{
     nbCuts[1] = 0; /* Lacroix inequalities */
     nbCuts[2] = 0; /* W1W2 inequalities */
     nbCuts[3] = 0; /* W1W2I inequalities */
+    nbCuts[4] = 0;
 
 	//initialiser le temps associé à chaque contrainte
     temps[0]=0;
     temps[1]=0;
     temps[2]=0;
     temps[3]=0;
+    temps[4] = 0;
   }
 void computeTime();
 void printInfo();

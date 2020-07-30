@@ -225,7 +225,7 @@ int main(int argc, char** argv){
 	
     // And Finally
     IloCplex cplex(model);
-	
+	cplex.setParam(IloCplex::Param::TimeLimit, 3600);
 
 	IloObjective obj=IloAdd(model, IloMaximize(env, 0.0));
 	
@@ -249,6 +249,8 @@ int main(int argc, char** argv){
 	stat.end = clock();
 	stat.nbCst = nbCst;
 	stat.printInfo();
+	cout<<stat.start<<endl;
+	cout<<stat.end<<endl;
 	stat.writeFile(fResultName);
     cplex.end();
 

@@ -115,6 +115,28 @@ void Node::MakeCplexVarflot(IloEnv env){
 	_s = IloNumVar(env, 0.0, 1.0, IloNumVar::Int,name);
 }
 
+double Node::val(){
+
+	double result=0;
+	list<pair<int,Edge*> >::iterator it ;
+
+	for(it = _incList.begin(); it != _incList.end() ; it ++){
+		if((*it).second->aCheval){
+
+			result = result -(1- ((*it).second->_valx));
+		}
+		else{
+			result = result +(1- ((*it).second->_valx));
+		}
+
+
+	}
+
+
+	return result;
+
+}
+
 
 
 //////////////////////////////
@@ -357,7 +379,7 @@ bool Graph::connected(){ //return true if it's not a 3 cut
 		}
 	}
 
-	int part2;
+	int part2 = -1;
 	for(int i = 0 ; i < _nodes.size();i++){
 		if(not	_nodes[i].visited){
 			part2 = i;
@@ -365,9 +387,11 @@ bool Graph::connected(){ //return true if it's not a 3 cut
 			
 		}
 	}
+	if(part2 == -1) return true;
 	_nodes[part2].visited  =true;
 	vector<int> explore2;
 	explore2.push_back(part2);
+	
 	while(explore2.size() > 0){
 		actual_node = explore2[0];
 
@@ -383,6 +407,7 @@ bool Graph::connected(){ //return true if it's not a 3 cut
 			}		
 		}
 	}
+	
 	for(int i = 0 ; i < _nodes.size();i++){
 		if(not	_nodes[i].visited){
 			return false;
@@ -633,7 +658,25 @@ double Graph::Dijkstra(int s, int t, vector<int>&T, vector<double>&D, vector<int
     return -1;
 
 }
+void Graph::gloutInit(){
 
+	for(int i = 0 ; i < _nbNodes ; i ++){
+
+		_nodes[i].adjW1=false;
+		_nodes[i].adjW2=false;
+
+	}
+
+	list<Edge*>::iterator it;
+	for(it = _edges.begin() ;  it != _edges.end(); it ++){
+		(*it)->aCheval = false;
+
+
+	}	
+
+
+
+}
 
 #ifdef USING_CPLEX
 void Graph::MakeCplexVar(IloEnv & env){
