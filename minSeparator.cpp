@@ -152,11 +152,10 @@ list<IloRange> plMinSeparatorRandom(Graph & g, IloEnv env){ //
 
 }
 
-
-list<IloRange> plMinSeparator(Graph & g, IloEnv env, ModelMinSeparator& momo){ // 
+void plMinSeparator(Graph & g, IloEnv env, ModelMinSeparator& momo,list<IloRange> & result){ // 
 	
 	
-	list<IloRange> result;
+	
 	int nbCst = 0;
 
 	#ifdef _OUTPUT_
@@ -226,7 +225,7 @@ list<IloRange> plMinSeparator(Graph & g, IloEnv env, ModelMinSeparator& momo){ /
 				}
 				
 				if(nbCst >= MAXCST ){
-						return result;
+						return ;
 					}
 				momo.deleta(k,z);	
 			}
@@ -242,7 +241,7 @@ list<IloRange> plMinSeparator(Graph & g, IloEnv env, ModelMinSeparator& momo){ /
 	#endif
 
 	
-	return result;
+	
 
 
 }

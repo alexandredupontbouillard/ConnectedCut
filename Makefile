@@ -49,7 +49,7 @@ LEMONINCDIR = $(LEMONDIR)/include/lemon
 
 CCFLAGS = $(CCOPT) -I$(CPLEXINCDIR) -I$(CONCERTINCDIR) -I$(LEMONINCDIR)
 
-all:	MCCP_Tree_Form formulationFlot w1w2 hojny_flot w1w2Glout w1w2GloutExact test2connected
+all:	MCCP_Tree_Form formulationFlot w1w2 hojny_flot 
 
 MCCP_Tree_Form: MCCP_Tree_Form.o Graph.o heap2k.o heap2k.h Graph.h 
 	$(CCC) $(CCFLAGS) MCCP_Tree_Form.o heap2k.o Graph.o -o MCCP_Tree_Form $(CCLNFLAGS)
@@ -63,31 +63,8 @@ w1w2: w1w2.o Graph.o heap2k.o heap2k.h Graph.h minSeparator.o statStruct.o statS
 w1w2.o: w1w2.cpp Graph.h minSeparator.h statStruct.h ModelMinSeparator.h 
 	$(CCC) -c $(CCFLAGS) w1w2.cpp -o w1w2.o
 
-test2connected: test2connected.o Graph.o heap2k.o heap2k.h Graph.h 
-	$(CCC) $(CCFLAGS) test2connected.o  heap2k.o  Graph.o  -o test2connected $(CCLNFLAGS)
-
-test2connected.o: test2connected.cpp Graph.h 
-	$(CCC) -c $(CCFLAGS) test2connected.cpp -o test2connected.o
-
-
-
-w1w2Glout: w1w2Glout.o Graph.o heap2k.o heap2k.h Graph.h minSeparator.o statStruct.o statStruct.h ModelMinSeparator.o ModelMinSeparator.h
-	$(CCC) $(CCFLAGS) w1w2Glout.o   heap2k.o Graph.o statStruct.o minSeparator.o  ModelMinSeparator.o -o w1w2Glout $(CCLNFLAGS)
-
-w1w2Glout.o: w1w2Glout.cpp Graph.h minSeparator.h statStruct.h ModelMinSeparator.h 
-	$(CCC) -c $(CCFLAGS) w1w2Glout.cpp -o w1w2Glout.o
-
-w1w2GloutExact: w1w2GloutExact.o Graph.o heap2k.o heap2k.h Graph.h minSeparator.o statStruct.o statStruct.h ModelMinSeparator.o ModelMinSeparator.h
-	$(CCC) $(CCFLAGS) w1w2GloutExact.o   heap2k.o Graph.o statStruct.o minSeparator.o  ModelMinSeparator.o -o w1w2GloutExact $(CCLNFLAGS)
-
-w1w2GloutExact.o: w1w2GloutExact.cpp Graph.h minSeparator.h statStruct.h ModelMinSeparator.h 
-	$(CCC) -c $(CCFLAGS) w1w2Glout.cpp -o w1w2GloutExact.o
-
-
-
 ModelMinSeparator.o: ModelMinSeparator.cpp ModelMinSeparator.h Graph.h 
 	$(CCC) -c $(CCFLAGS) ModelMinSeparator.cpp -o ModelMinSeparator.o
-
 
 minSeparator.o : minSeparator.cpp Graph.h minSeparator.h ModelMinSeparator.h
 	$(CCC) -c  $(CCFLAGS) $(CCLNDIRS)  minSeparator.cpp -o minSeparator.o

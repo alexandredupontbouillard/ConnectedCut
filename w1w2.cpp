@@ -242,7 +242,11 @@ void cycleSep(Graph & G, Graph &Gp,
   list<pair<pair<int,int>,int> > L; // liste d'arete suivi de 0 si dans C\F et 1 i dans F
   list<pair<pair<int,int>,int> >::iterator itL;
   double val;
+ 	for(int ii = 0; ii < G._nodes.size(); ii++){
 
+		G._nodes[i].visitedCycle = false;
+
+	}
   n=G._nbNodes;
 
   vector<int>T=vector<int>(2*n,0);
@@ -265,61 +269,77 @@ void cycleSep(Graph & G, Graph &Gp,
   /* Loop on the node looking for a path from i to i */
   //cout<<"Launch cycle separation main loop\n"<<endl;
   for (i=0;i<n;i++){
+	if(not G._nodes[i].visitedCycle){
+		/* Launch Dijkstra */
+	 	
+		val=Gp.Dijkstra(i,i+n,T,D,card,H);
 
-    /* Launch Dijkstra */
- 
-    val=Gp.Dijkstra(i,i+n,T,D,card,H);
+		/* Translate from path in Gp to set C and F of the constraint */
+		//cout<<"violation: "<<val<<endl;
+		// for (j=0;j<2*n;j++)
+		//   cout<<"T["<<j<<"]="<<T[j]<<endl;
+		// cout<<endl;
 
-    /* Translate from path in Gp to set C and F of the constraint */
-    //cout<<"violation: "<<val<<endl;
-    // for (j=0;j<2*n;j++)
-    //   cout<<"T["<<j<<"]="<<T[j]<<endl;
-    // cout<<endl;
+		if ( (T[i+n]!=-1)&&(1-val>EPS) ){  // The support graph contains a path from i to i+n
+		  u=i+n;
+		  L.clear();
+		  while(u!=i){
+			
+			
+		if ((u<n)&&(T[u]<n))
+		  L.push_back(make_pair(make_pair(u,T[u]),0));
+			//G._nodes[u].visitedCycle = true;
+		if ((u>=n)&&(T[u]>=n))
+		  L.push_back(make_pair(make_pair(u-n,T[u]-n),0));
+			//G._nodes[u-n].visitedCycle = true;
+		
+		if ((u<n)&&(T[u]>=n))
+		  L.push_back(make_pair(make_pair(u,T[u]-n),1));
+		//G._nodes[u].visitedCycle = true;
+		if ((u>=n)&&(T[u]<n))
+		  L.push_back(make_pair(make_pair(u-n,T[u]),1));
+		//G._nodes[u-n].visitedCycle = true;
+		u=T[u];
+		  }
+		
+		 
+		  // for (itL=L.begin();itL!=L.end();itL++)
+		  // 	cout<<"("<<(*itL).first.first<<","<<(*itL).first.second<<","<<(*itL).second<<") ";
+		  // cout<<endl;
+		  // cin>>u;
 
-    if ( (T[i+n]!=-1)&&(1-val>EPS) ){  // The support graph contains a path from i to i+n
-      u=i+n;
-      L.clear();
-      while(u!=i){
-	if ((u<n)&&(T[u]<n))
-	  L.push_back(make_pair(make_pair(u,T[u]),0));
-	if ((u>=n)&&(T[u]>=n))
-	  L.push_back(make_pair(make_pair(u-n,T[u]-n),0));
-	if ((u<n)&&(T[u]>=n))
-	  L.push_back(make_pair(make_pair(u,T[u]-n),1));
-	if ((u>=n)&&(T[u]<n))
-	  L.push_back(make_pair(make_pair(u-n,T[u]),1));
-	u=T[u];
-      }
-     
-      // for (itL=L.begin();itL!=L.end();itL++)
-      // 	cout<<"("<<(*itL).first.first<<","<<(*itL).first.second<<","<<(*itL).second<<") ";
-      // cout<<endl;
-      // cin>>u;
+		  extract_elementary_cycle(L,G._nbNodes);
 
-      extract_elementary_cycle(L,G._nbNodes);
+		  /* Translate into a cplex cste */
 
-      /* Translate into a cplex cste */
-
-      IloExpr Laclhs(env);
-      IloInt F;
-      F=0;
-      for (itL=L.begin();itL!=L.end();itL++){
-	if ((*itL).second==0)
-	  Laclhs -= G._nodes[(*itL).first.first][(*itL).first.second]->_x;
-	else{
-	  Laclhs += G._nodes[(*itL).first.first][(*itL).first.second]->_x;
-	  F++;
+		  IloExpr Laclhs(env);
+		  IloInt F;
+		  F=0;
+			itL=L.begin();
+			G._nodes[(*itL).first.first][(*itL).first.second]->_valx = 100;
+		  for (itL=L.begin();itL!=L.end();itL++){
+			if ((*itL).second==0)
+			  Laclhs -= G._nodes[(*itL).first.first][(*itL).first.second]->_x;
+			else{
+			  Laclhs += G._nodes[(*itL).first.first][(*itL).first.second]->_x;
+			  F++;
+			}
+			//cout<<"yo"<<endl;
+			
+			//cout<<"ya"<<endl;	
+		  }
+			
+		  poolStruct newConst;
+		  newConst.ineq = IloRange(Laclhs <= F - 1);
+		  newConst.type = CYCLE;
+		  violatedConst.push_back(newConst);
+		  #ifdef _OUTPUT_
+		  cout<< newConst.ineq << endl;
+		  #endif
+			 
+		}
+		
 	}
-      }
-      poolStruct newConst;
-      newConst.ineq = IloRange(Laclhs <= F - 1);
-      newConst.type = CYCLE;
-      violatedConst.push_back(newConst);
-      #ifdef _OUTPUT_
-      cout<< newConst.ineq << endl;
-      #endif
-     
-    }
  
   }
 
@@ -353,6 +373,25 @@ ILOLAZYCONSTRAINTCALLBACK6(GenLazyCut,
 	
     }
 
+
+	    t = clock();
+
+	//list<IloRange> l = plMinSeparatorRandom(G,getEnv());
+	
+	list<IloRange> l ;
+	 plMinSeparator(G,getEnv(),momo,l);
+	t = clock()-t;
+	stat.temps[W1W2] += t;
+	
+	while(!l.empty()){
+		add(l.front(),IloCplex::UseCutPurge);
+		l.pop_front();
+		stat.nbCuts[W1W2]++;
+	}
+
+
+
+
     /* Check Cycle inequalities */
     t = clock();
     cycleSep(G,Gp,getEnv(),violatedConst);
@@ -362,19 +401,7 @@ ILOLAZYCONSTRAINTCALLBACK6(GenLazyCut,
 
 
 	
-        t = clock();
-
-	//list<IloRange> l = plMinSeparatorRandom(G,getEnv());
-	
-	list<IloRange> l = plMinSeparator(G,getEnv(),momo);
-	t = clock()-t;
-	stat.temps[W1W2] += t;
-	
-	while(!l.empty()){
-		add(l.front(),IloCplex::UseCutPurge);
-		l.pop_front();
-		stat.nbCuts[W1W2]++;
-	}
+    
 
 
 
@@ -423,19 +450,13 @@ ILOUSERCUTCALLBACK6(GenUserCut,
 		
 	    }
 
-	    /* Check Cycle inequalities */
-	    t = clock();
-	    cycleSep(G,Gp,getEnv(),violatedConst);
-	    t = clock()-t;
-	    stat.temps[CYCLE]+= t;
 
-	
-	
 	t = clock();
 
 	//list<IloRange> l = plMinSeparatorRandom(G,getEnv());
 
-	list<IloRange> l = plMinSeparator(G,getEnv(),momo);
+	list<IloRange> l;
+    plMinSeparator(G,getEnv(),momo,l);
 	t = clock()-t;
 	stat.temps[W1W2] +=t;	
 	
@@ -449,6 +470,17 @@ ILOUSERCUTCALLBACK6(GenUserCut,
 		stat.nbCuts[W1W2]++;
 	}
 	
+
+
+	    /* Check Cycle inequalities */
+	    t = clock();
+	    cycleSep(G,Gp,getEnv(),violatedConst);
+	    t = clock()-t;
+	    stat.temps[CYCLE]+= t;
+
+	
+	
+
 	
 	
 	
@@ -499,13 +531,6 @@ ILOLAZYCONSTRAINTCALLBACK6(SimpleLazyCut,
 	
     }
 
-    /* Check Cycle inequalities */
-    t = clock();
-    cycleSep(G,Gp,getEnv(),violatedConst);
-    t = clock()-t;
-    stat.temps[CYCLE]+=t;
-
-
 
 	cout<<"separation entière O(n)"<<endl;
 	t = clock();
@@ -515,6 +540,16 @@ ILOLAZYCONSTRAINTCALLBACK6(SimpleLazyCut,
 	stat.temps[W1W2I] += t;
 		
 	cout<<"separation entière O(n) finie"<<endl;
+
+    /* Check Cycle inequalities */
+    t = clock();
+    cycleSep(G,Gp,getEnv(),violatedConst);
+    t = clock()-t;
+    stat.temps[CYCLE]+=t;
+
+
+
+	
 
 
 
@@ -555,15 +590,9 @@ ILOUSERCUTCALLBACK6(GloutUserCut,
 		
 		}
 
-		/* Check Cycle inequalities */
-		t = clock();
-		cycleSep(G,Gp,getEnv(),violatedConst);
-		t = clock()-t;
-		stat.temps[CYCLE]+= t;
 
 
-
-		t = clock();
+			t = clock();
 
 		list<IloRange> l;
 		gloutGlout(G,getEnv(), l);
@@ -579,6 +608,16 @@ ILOUSERCUTCALLBACK6(GloutUserCut,
 			l.pop_front();
 			stat.nbCuts[GLOUTON]++;
 		}
+
+		/* Check Cycle inequalities */
+		t = clock();
+		cycleSep(G,Gp,getEnv(),violatedConst);
+		t = clock()-t;
+		stat.temps[CYCLE]+= t;
+
+
+
+	
 
 
 
@@ -623,14 +662,9 @@ ILOUSERCUTCALLBACK6(GloutExactUserCut,
 		
 		}
 
-		/* Check Cycle inequalities */
-		t = clock();
-		cycleSep(G,Gp,getEnv(),violatedConst);
-		t = clock()-t;
-		stat.temps[CYCLE]+= t;
+		
 
-
-
+// w1w2 inequalities
 		t = clock();
 
 		list<IloRange> l;
@@ -667,6 +701,20 @@ ILOUSERCUTCALLBACK6(GloutExactUserCut,
 
 		}
 
+
+
+
+
+
+		/* Check Cycle inequalities */
+		t = clock();
+		cycleSep(G,Gp,getEnv(),violatedConst);
+		t = clock()-t;
+		stat.temps[CYCLE]+= t;
+
+
+
+		
 
 
 

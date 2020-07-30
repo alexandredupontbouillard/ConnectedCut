@@ -81,9 +81,12 @@ class Node {
   Node(const int & id, const int & nbnodes, const double & coordx, const double & coordy);
   ~Node();
 
+
+
   void addEdge(Edge * e, const int & adjnode);
   Edge* & operator[](const int & i);
   bool visited;
+  bool visitedCycle;
   void Print();
 
 
