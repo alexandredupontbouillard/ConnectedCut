@@ -129,7 +129,7 @@ class Graph{
 	       const int & first,
 	       const int & last,
 	       const double & cost);
-
+  bool is2connected();
   void Print();
   void Write_ps_pdf();
   void Write_sol_ps_pdf();

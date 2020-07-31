@@ -1,0 +1,247 @@
+./w1w2 data_clean/Steiner-80/i080-001.steiner 1
+./w1w2 data_clean/Steiner-80/i080-002.steiner 1
+./w1w2 data_clean/Steiner-80/i080-003.steiner 1
+./w1w2 data_clean/Steiner-80/i080-004.steiner 1
+./w1w2 data_clean/Steiner-80/i080-005.steiner 1
+./w1w2 data_clean/Steiner-80/i080-011.steiner 1
+./w1w2 data_clean/Steiner-80/i080-012.steiner 1
+./w1w2 data_clean/Steiner-80/i080-013.steiner 1
+./w1w2 data_clean/Steiner-80/i080-014.steiner 1
+./w1w2 data_clean/Steiner-80/i080-015.steiner 1
+./w1w2 data_clean/Steiner-80/i080-021.steiner 1
+./w1w2 data_clean/Steiner-80/i080-031.steiner 1
+./w1w2 data_clean/Steiner-80/i080-032.steiner 1
+./w1w2 data_clean/Steiner-80/i080-033.steiner 1
+./w1w2 data_clean/Steiner-80/i080-034.steiner 1
+./w1w2 data_clean/Steiner-80/i080-035.steiner 1
+./w1w2 data_clean/Steiner-80/i080-041.steiner 1
+./w1w2 data_clean/Steiner-80/i080-042.steiner 1
+./w1w2 data_clean/Steiner-80/i080-043.steiner 1
+./w1w2 data_clean/Steiner-80/i080-044.steiner 1
+./w1w2 data_clean/Steiner-80/i080-045.steiner 1
+./w1w2 data_clean/Steiner-80/i080-101.steiner 1
+./w1w2 data_clean/Steiner-80/i080-102.steiner 1
+./w1w2 data_clean/Steiner-80/i080-103.steiner 1
+./w1w2 data_clean/Steiner-80/i080-104.steiner 1
+./w1w2 data_clean/Steiner-80/i080-105.steiner 1
+./w1w2 data_clean/Steiner-80/i080-111.steiner 1
+./w1w2 data_clean/Steiner-80/i080-112.steiner 1
+./w1w2 data_clean/Steiner-80/i080-113.steiner 1
+./w1w2 data_clean/Steiner-80/i080-114.steiner 1
+./w1w2 data_clean/Steiner-80/i080-115.steiner 1
+./w1w2 data_clean/Steiner-80/i080-131.steiner 1
+./w1w2 data_clean/Steiner-80/i080-132.steiner 1
+./w1w2 data_clean/Steiner-80/i080-133.steiner 1
+./w1w2 data_clean/Steiner-80/i080-134.steiner 1
+./w1w2 data_clean/Steiner-80/i080-135.steiner 1
+./w1w2 data_clean/Steiner-80/i080-141.steiner 1
+./w1w2 data_clean/Steiner-80/i080-142.steiner 1
+./w1w2 data_clean/Steiner-80/i080-143.steiner 1
+./w1w2 data_clean/Steiner-80/i080-144.steiner 1
+./w1w2 data_clean/Steiner-80/i080-145.steiner 1
+./w1w2 data_clean/Steiner-80/i080-201.steiner 1
+./w1w2 data_clean/Steiner-80/i080-202.steiner 1
+./w1w2 data_clean/Steiner-80/i080-203.steiner 1
+./w1w2 data_clean/Steiner-80/i080-204.steiner 1
+./w1w2 data_clean/Steiner-80/i080-205.steiner 1
+./w1w2 data_clean/Steiner-80/i080-211.steiner 1
+./w1w2 data_clean/Steiner-80/i080-212.steiner 1
+./w1w2 data_clean/Steiner-80/i080-213.steiner 1
+./w1w2 data_clean/Steiner-80/i080-214.steiner 1
+./w1w2 data_clean/Steiner-80/i080-215.steiner 1
+./w1w2 data_clean/Steiner-80/i080-231.steiner 1
+./w1w2 data_clean/Steiner-80/i080-232.steiner 1
+./w1w2 data_clean/Steiner-80/i080-233.steiner 1
+./w1w2 data_clean/Steiner-80/i080-234.steiner 1
+./w1w2 data_clean/Steiner-80/i080-235.steiner 1
+./w1w2 data_clean/Steiner-80/i080-241.steiner 1
+./w1w2 data_clean/Steiner-80/i080-242.steiner 1
+./w1w2 data_clean/Steiner-80/i080-243.steiner 1
+./w1w2 data_clean/Steiner-80/i080-244.steiner 1
+./w1w2 data_clean/Steiner-80/i080-245.steiner 1
+./w1w2 data_clean/Steiner-80/i080-301.steiner 1
+./w1w2 data_clean/Steiner-80/i080-302.steiner 1
+./w1w2 data_clean/Steiner-80/i080-303.steiner 1
+./w1w2 data_clean/Steiner-80/i080-304.steiner 1
+./w1w2 data_clean/Steiner-80/i080-305.steiner 1
+./w1w2 data_clean/Steiner-80/i080-311.steiner 1
+./w1w2 data_clean/Steiner-80/i080-312.steiner 1
+./w1w2 data_clean/Steiner-80/i080-313.steiner 1
+./w1w2 data_clean/Steiner-80/i080-314.steiner 1
+./w1w2 data_clean/Steiner-80/i080-315.steiner 1
+./w1w2 data_clean/Steiner-80/i080-331.steiner 1
+./w1w2 data_clean/Steiner-80/i080-332.steiner 1
+./w1w2 data_clean/Steiner-80/i080-333.steiner 1
+./w1w2 data_clean/Steiner-80/i080-334.steiner 1
+./w1w2 data_clean/Steiner-80/i080-335.steiner 1
+./w1w2 data_clean/Steiner-80/i080-341.steiner 1
+./w1w2 data_clean/Steiner-80/i080-342.steiner 1
+./w1w2 data_clean/Steiner-80/i080-343.steiner 1
+./w1w2 data_clean/Steiner-80/i080-344.steiner 1
+./w1w2 data_clean/Steiner-80/i160-345.steiner 1
+
+
+./w1w2 data_clean/Steiner-80/i080-001.steiner 2
+./w1w2 data_clean/Steiner-80/i080-002.steiner 2
+./w1w2 data_clean/Steiner-80/i080-003.steiner 2
+./w1w2 data_clean/Steiner-80/i080-004.steiner 2
+./w1w2 data_clean/Steiner-80/i080-005.steiner 2
+./w1w2 data_clean/Steiner-80/i080-011.steiner 2
+./w1w2 data_clean/Steiner-80/i080-012.steiner 2
+./w1w2 data_clean/Steiner-80/i080-013.steiner 2
+./w1w2 data_clean/Steiner-80/i080-014.steiner 2
+./w1w2 data_clean/Steiner-80/i080-015.steiner 2
+./w1w2 data_clean/Steiner-80/i080-021.steiner 2
+./w1w2 data_clean/Steiner-80/i080-031.steiner 2
+./w1w2 data_clean/Steiner-80/i080-032.steiner 2
+./w1w2 data_clean/Steiner-80/i080-033.steiner 2
+./w1w2 data_clean/Steiner-80/i080-034.steiner 2
+./w1w2 data_clean/Steiner-80/i080-035.steiner 2
+./w1w2 data_clean/Steiner-80/i080-041.steiner 2
+./w1w2 data_clean/Steiner-80/i080-042.steiner 2
+./w1w2 data_clean/Steiner-80/i080-043.steiner 2
+./w1w2 data_clean/Steiner-80/i080-044.steiner 2
+./w1w2 data_clean/Steiner-80/i080-045.steiner 2
+./w1w2 data_clean/Steiner-80/i080-101.steiner 2
+./w1w2 data_clean/Steiner-80/i080-102.steiner 2
+./w1w2 data_clean/Steiner-80/i080-103.steiner 2
+./w1w2 data_clean/Steiner-80/i080-104.steiner 2
+./w1w2 data_clean/Steiner-80/i080-105.steiner 2
+./w1w2 data_clean/Steiner-80/i080-111.steiner 2
+./w1w2 data_clean/Steiner-80/i080-112.steiner 2
+./w1w2 data_clean/Steiner-80/i080-113.steiner 2
+./w1w2 data_clean/Steiner-80/i080-114.steiner 2
+./w1w2 data_clean/Steiner-80/i080-115.steiner 2
+./w1w2 data_clean/Steiner-80/i080-131.steiner 2
+./w1w2 data_clean/Steiner-80/i080-132.steiner 2
+./w1w2 data_clean/Steiner-80/i080-133.steiner 2
+./w1w2 data_clean/Steiner-80/i080-134.steiner 2
+./w1w2 data_clean/Steiner-80/i080-135.steiner 2
+./w1w2 data_clean/Steiner-80/i080-141.steiner 2
+./w1w2 data_clean/Steiner-80/i080-142.steiner 2
+./w1w2 data_clean/Steiner-80/i080-143.steiner 2
+./w1w2 data_clean/Steiner-80/i080-144.steiner 2
+./w1w2 data_clean/Steiner-80/i080-145.steiner 2
+./w1w2 data_clean/Steiner-80/i080-201.steiner 2
+./w1w2 data_clean/Steiner-80/i080-202.steiner 2
+./w1w2 data_clean/Steiner-80/i080-203.steiner 2
+./w1w2 data_clean/Steiner-80/i080-204.steiner 2
+./w1w2 data_clean/Steiner-80/i080-205.steiner 2
+./w1w2 data_clean/Steiner-80/i080-211.steiner 2
+./w1w2 data_clean/Steiner-80/i080-212.steiner 2
+./w1w2 data_clean/Steiner-80/i080-213.steiner 2
+./w1w2 data_clean/Steiner-80/i080-214.steiner 2
+./w1w2 data_clean/Steiner-80/i080-215.steiner 2
+./w1w2 data_clean/Steiner-80/i080-231.steiner 2
+./w1w2 data_clean/Steiner-80/i080-232.steiner 2
+./w1w2 data_clean/Steiner-80/i080-233.steiner 2
+./w1w2 data_clean/Steiner-80/i080-234.steiner 2
+./w1w2 data_clean/Steiner-80/i080-235.steiner 2
+./w1w2 data_clean/Steiner-80/i080-241.steiner 2
+./w1w2 data_clean/Steiner-80/i080-242.steiner 2
+./w1w2 data_clean/Steiner-80/i080-243.steiner 2
+./w1w2 data_clean/Steiner-80/i080-244.steiner 2
+./w1w2 data_clean/Steiner-80/i080-245.steiner 2
+./w1w2 data_clean/Steiner-80/i080-301.steiner 2
+./w1w2 data_clean/Steiner-80/i080-302.steiner 2
+./w1w2 data_clean/Steiner-80/i080-303.steiner 2
+./w1w2 data_clean/Steiner-80/i080-304.steiner 2
+./w1w2 data_clean/Steiner-80/i080-305.steiner 2
+./w1w2 data_clean/Steiner-80/i080-311.steiner 2
+./w1w2 data_clean/Steiner-80/i080-312.steiner 2
+./w1w2 data_clean/Steiner-80/i080-313.steiner 2
+./w1w2 data_clean/Steiner-80/i080-314.steiner 2
+./w1w2 data_clean/Steiner-80/i080-315.steiner 2
+./w1w2 data_clean/Steiner-80/i080-331.steiner 2
+./w1w2 data_clean/Steiner-80/i080-332.steiner 2
+./w1w2 data_clean/Steiner-80/i080-333.steiner 2
+./w1w2 data_clean/Steiner-80/i080-334.steiner 2
+./w1w2 data_clean/Steiner-80/i080-335.steiner 2
+./w1w2 data_clean/Steiner-80/i080-341.steiner 2
+./w1w2 data_clean/Steiner-80/i080-342.steiner 2
+./w1w2 data_clean/Steiner-80/i080-343.steiner 2
+./w1w2 data_clean/Steiner-80/i080-344.steiner 2
+./w1w2 data_clean/Steiner-80/i160-345.steiner 2
+
+./hojny_flot data_clean/Steiner-80/i080-001.steiner 
+./hojny_flot data_clean/Steiner-80/i080-002.steiner 
+./hojny_flot data_clean/Steiner-80/i080-003.steiner 
+./hojny_flot data_clean/Steiner-80/i080-004.steiner 
+./hojny_flot data_clean/Steiner-80/i080-005.steiner 
+./hojny_flot data_clean/Steiner-80/i080-011.steiner 
+./hojny_flot data_clean/Steiner-80/i080-012.steiner 
+./hojny_flot data_clean/Steiner-80/i080-013.steiner 
+./hojny_flot data_clean/Steiner-80/i080-014.steiner 
+./hojny_flot data_clean/Steiner-80/i080-015.steiner 
+./hojny_flot data_clean/Steiner-80/i080-021.steiner 
+./hojny_flot data_clean/Steiner-80/i080-031.steiner 
+./hojny_flot data_clean/Steiner-80/i080-032.steiner 
+./hojny_flot data_clean/Steiner-80/i080-033.steiner 
+./hojny_flot data_clean/Steiner-80/i080-034.steiner 
+./hojny_flot data_clean/Steiner-80/i080-035.steiner 
+./hojny_flot data_clean/Steiner-80/i080-041.steiner 
+./hojny_flot data_clean/Steiner-80/i080-042.steiner 
+./hojny_flot data_clean/Steiner-80/i080-043.steiner 
+./hojny_flot data_clean/Steiner-80/i080-044.steiner 
+./hojny_flot data_clean/Steiner-80/i080-045.steiner 
+./hojny_flot data_clean/Steiner-80/i080-101.steiner 
+./hojny_flot data_clean/Steiner-80/i080-102.steiner 
+./hojny_flot data_clean/Steiner-80/i080-103.steiner 
+./hojny_flot data_clean/Steiner-80/i080-104.steiner 
+./hojny_flot data_clean/Steiner-80/i080-105.steiner 
+./hojny_flot data_clean/Steiner-80/i080-111.steiner 
+./hojny_flot data_clean/Steiner-80/i080-112.steiner 
+./hojny_flot data_clean/Steiner-80/i080-113.steiner 
+./hojny_flot data_clean/Steiner-80/i080-114.steiner 
+./hojny_flot data_clean/Steiner-80/i080-115.steiner 
+./hojny_flot data_clean/Steiner-80/i080-131.steiner 
+./hojny_flot data_clean/Steiner-80/i080-132.steiner 
+./hojny_flot data_clean/Steiner-80/i080-133.steiner 
+./hojny_flot data_clean/Steiner-80/i080-134.steiner 
+./hojny_flot data_clean/Steiner-80/i080-135.steiner 
+./hojny_flot data_clean/Steiner-80/i080-141.steiner 
+./hojny_flot data_clean/Steiner-80/i080-142.steiner 
+./hojny_flot data_clean/Steiner-80/i080-143.steiner 
+./hojny_flot data_clean/Steiner-80/i080-144.steiner 
+./hojny_flot data_clean/Steiner-80/i080-145.steiner 
+./hojny_flot data_clean/Steiner-80/i080-201.steiner 
+./hojny_flot data_clean/Steiner-80/i080-202.steiner 
+./hojny_flot data_clean/Steiner-80/i080-203.steiner 
+./hojny_flot data_clean/Steiner-80/i080-204.steiner 
+./hojny_flot data_clean/Steiner-80/i080-205.steiner 
+./hojny_flot data_clean/Steiner-80/i080-211.steiner 
+./hojny_flot data_clean/Steiner-80/i080-212.steiner 
+./hojny_flot data_clean/Steiner-80/i080-213.steiner 
+./hojny_flot data_clean/Steiner-80/i080-214.steiner 
+./hojny_flot data_clean/Steiner-80/i080-215.steiner 
+./hojny_flot data_clean/Steiner-80/i080-231.steiner 
+./hojny_flot data_clean/Steiner-80/i080-232.steiner 
+./hojny_flot data_clean/Steiner-80/i080-233.steiner 
+./hojny_flot data_clean/Steiner-80/i080-234.steiner 
+./hojny_flot data_clean/Steiner-80/i080-235.steiner 
+./hojny_flot data_clean/Steiner-80/i080-241.steiner 
+./hojny_flot data_clean/Steiner-80/i080-242.steiner 
+./hojny_flot data_clean/Steiner-80/i080-243.steiner 
+./hojny_flot data_clean/Steiner-80/i080-244.steiner 
+./hojny_flot data_clean/Steiner-80/i080-245.steiner 
+./hojny_flot data_clean/Steiner-80/i080-301.steiner 
+./hojny_flot data_clean/Steiner-80/i080-302.steiner 
+./hojny_flot data_clean/Steiner-80/i080-303.steiner 
+./hojny_flot data_clean/Steiner-80/i080-304.steiner 
+./hojny_flot data_clean/Steiner-80/i080-305.steiner 
+./hojny_flot data_clean/Steiner-80/i080-311.steiner 
+./hojny_flot data_clean/Steiner-80/i080-312.steiner 
+./hojny_flot data_clean/Steiner-80/i080-313.steiner 
+./hojny_flot data_clean/Steiner-80/i080-314.steiner 
+./hojny_flot data_clean/Steiner-80/i080-315.steiner 
+./hojny_flot data_clean/Steiner-80/i080-331.steiner 
+./hojny_flot data_clean/Steiner-80/i080-332.steiner 
+./hojny_flot data_clean/Steiner-80/i080-333.steiner 
+./hojny_flot data_clean/Steiner-80/i080-334.steiner 
+./hojny_flot data_clean/Steiner-80/i080-335.steiner 
+./hojny_flot data_clean/Steiner-80/i080-341.steiner 
+./hojny_flot data_clean/Steiner-80/i080-342.steiner 
+./hojny_flot data_clean/Steiner-80/i080-343.steiner 
+./hojny_flot data_clean/Steiner-80/i080-344.steiner 
+./hojny_flot data_clean/Steiner-80/i160-345.steiner 
+

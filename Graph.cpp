@@ -294,7 +294,7 @@ vector<int> Graph::getBridges(){ // after this function, the graph gets corrupte
 	AddEdge(_edges.size(),0,nb_noeud,0);
 		
 	AddEdge(_edges.size(),0,nb_noeud+1,0);
-	AddEdge(_edges.size(),nb_noeud,nb_noeud+1,0);
+	AddEdge(_edges.size(),0,nb_noeud+1,nb_noeud);
 	
 	explore.push_back(nb_noeud);
 	int actual_node;
@@ -305,6 +305,7 @@ vector<int> Graph::getBridges(){ // after this function, the graph gets corrupte
 	vector<int> depth(_nodes.size());
 	vector<int> low(_nodes.size());
 	_nodes[explore[0]].visited = true;
+	
 	while(explore.size() > 0){
 		actual_node = explore[0];
 		depth[actual_node] = indice;
@@ -314,9 +315,11 @@ vector<int> Graph::getBridges(){ // after this function, the graph gets corrupte
 		list<pair<int,Edge*> >::iterator it;
 		for(it = _nodes[actual_node]._incList.begin(); it != _nodes[actual_node]._incList.end(); it++){
 			neighbour = it->first;
+			
 			if(not _nodes[neighbour].visited){
 				_nodes[neighbour].visited = true;
 				
+		
 				explore.insert(explore.begin(),neighbour);	
 				
 					
@@ -325,7 +328,7 @@ vector<int> Graph::getBridges(){ // after this function, the graph gets corrupte
 	}
 	int min;
 	
-	for(int i = order.size()-1 ; i>=1; i=i-1){
+	for(int i = order.size()-1 ; i>=0; i=i-1){
 		min = depth[order[i]];
 		for(it = _nodes[order[i]]._incList.begin(); it != _nodes[order[i]]._incList.end(); it++){
 			if(depth[it->first] < depth[order[i]]){
@@ -356,6 +359,7 @@ vector<int> Graph::getBridges(){ // after this function, the graph gets corrupte
 
 	return result;
 }
+
 
 bool Graph::connected(){ //return true if it's not a 3 cut
 	vector<int> explore;
@@ -417,6 +421,9 @@ bool Graph::connected(){ //return true if it's not a 3 cut
 	return true;
 	
 }
+
+
+
 
 // pour initialiser les parcours BFS permettant de tester la connexité
 void Graph::initBFS(){
@@ -677,6 +684,9 @@ void Graph::gloutInit(){
 
 
 }
+
+
+
 
 #ifdef USING_CPLEX
 void Graph::MakeCplexVar(IloEnv & env){

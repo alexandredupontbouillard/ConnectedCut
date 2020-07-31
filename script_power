@@ -1,0 +1,100 @@
+./w1w2 data_clean/power/case118.power 1
+./w1w2 data_clean/power/case1354pegase.power 1
+./w1w2 data_clean/power/case145.power 1
+./w1w2 data_clean/power/case14.power 1
+./w1w2 data_clean/power/case1888rte.power 1
+./w1w2 data_clean/power/case1951rte.power 1
+./w1w2 data_clean/power/case2383wp.power 1
+./w1w2 data_clean/power/case24_ieee_rts.power 1
+./w1w2 data_clean/power/case2736sp.power 1
+./w1w2 data_clean/power/case2737sop.power 1
+./w1w2 data_clean/power/case2746wop.power 1
+./w1w2 data_clean/power/case2746wp.power 1
+./w1w2 data_clean/power/case2848rte.power 1
+./w1w2 data_clean/power/case2868rte.power 1
+./w1w2 data_clean/power/case2869pegase.power 1
+./w1w2 data_clean/power/case300.power 1
+./w1w2 data_clean/power/case3012wp.power 1
+./w1w2 data_clean/power/case30.power 1
+./w1w2 data_clean/power/case30pwl.power 1
+./w1w2 data_clean/power/case30Q.power 1
+./w1w2 data_clean/power/case3120sp.power 1
+./w1w2 data_clean/power/case33bw.power 1
+./w1w2 data_clean/power/case39.power 1
+./w1w2 data_clean/power/case57.power 1
+./w1w2 data_clean/power/case6468rte.power 1
+./w1w2 data_clean/power/case6470rte.power 1
+./w1w2 data_clean/power/case6495rte.power 1
+./w1w2 data_clean/power/case6515rte.power 1
+./w1w2 data_clean/power/case89pegase.power 1
+./w1w2 data_clean/power/case9241pegase.power 1
+./w1w2 data_clean/power/case_ieee30.power 1
+./w1w2 data_clean/power/case_illinois200.power 1
+
+./w1w2 data_clean/power/case118.power 2
+./w1w2 data_clean/power/case1354pegase.power 2
+./w1w2 data_clean/power/case145.power 2
+./w1w2 data_clean/power/case14.power 2
+./w1w2 data_clean/power/case1888rte.power 2
+./w1w2 data_clean/power/case1951rte.power 2
+./w1w2 data_clean/power/case2383wp.power 2
+./w1w2 data_clean/power/case24_ieee_rts.power 2
+./w1w2 data_clean/power/case2736sp.power 2
+./w1w2 data_clean/power/case2737sop.power 2
+./w1w2 data_clean/power/case2746wop.power 2
+./w1w2 data_clean/power/case2746wp.power 2
+./w1w2 data_clean/power/case2848rte.power 2
+./w1w2 data_clean/power/case2868rte.power 2
+./w1w2 data_clean/power/case2869pegase.power 2
+./w1w2 data_clean/power/case300.power 2
+./w1w2 data_clean/power/case3012wp.power 2
+./w1w2 data_clean/power/case30.power 2
+./w1w2 data_clean/power/case30pwl.power 2
+./w1w2 data_clean/power/case30Q.power 2
+./w1w2 data_clean/power/case3120sp.power 2
+./w1w2 data_clean/power/case33bw.power 2
+./w1w2 data_clean/power/case39.power 2
+./w1w2 data_clean/power/case57.power 2
+./w1w2 data_clean/power/case6468rte.power 2
+./w1w2 data_clean/power/case6470rte.power 2
+./w1w2 data_clean/power/case6495rte.power 2
+./w1w2 data_clean/power/case6515rte.power 2
+./w1w2 data_clean/power/case89pegase.power 2
+./w1w2 data_clean/power/case9241pegase.power 2
+./w1w2 data_clean/power/case_ieee30.power 2
+./w1w2 data_clean/power/case_illinois200.power 2
+
+./hojny_flot data_clean/power/case118.power
+./hojny_flot data_clean/power/case1354pegase.power
+./hojny_flot data_clean/power/case145.power
+./hojny_flot data_clean/power/case14.power
+./hojny_flot data_clean/power/case1888rte.power
+./hojny_flot data_clean/power/case1951rte.power
+./hojny_flot data_clean/power/case2383wp.power
+./hojny_flot data_clean/power/case24_ieee_rts.power
+./hojny_flot data_clean/power/case2736sp.power
+./hojny_flot data_clean/power/case2737sop.power
+./hojny_flot data_clean/power/case2746wop.power
+./hojny_flot data_clean/power/case2746wp.power
+./hojny_flot data_clean/power/case2848rte.power
+./hojny_flot data_clean/power/case2868rte.power
+./hojny_flot data_clean/power/case2869pegase.power
+./hojny_flot data_clean/power/case300.power
+./hojny_flot data_clean/power/case3012wp.power
+./hojny_flot data_clean/power/case30.power
+./hojny_flot data_clean/power/case30pwl.power
+./hojny_flot data_clean/power/case30Q.power
+./hojny_flot data_clean/power/case3120sp.power
+./hojny_flot data_clean/power/case33bw.power
+./hojny_flot data_clean/power/case39.power
+./hojny_flot data_clean/power/case57.power
+./hojny_flot data_clean/power/case6468rte.power
+./hojny_flot data_clean/power/case6470rte.power
+./hojny_flot data_clean/power/case6495rte.power
+./hojny_flot data_clean/power/case6515rte.power
+./hojny_flot data_clean/power/case89pegase.power
+./hojny_flot data_clean/power/case9241pegase.power
+./hojny_flot data_clean/power/case_ieee30.power
+./hojny_flot data_clean/power/case_illinois200.power
+
+

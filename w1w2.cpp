@@ -782,8 +782,8 @@ int main(int argc, char** argv){
 	    
     statStruct stat;
     stat.init();
-    stat.formulation = "w1w2";
-    Graph G(argv[1]);
+    char * bl = argv[1];
+    Graph G(bl);
     Graph Gp(2*G._nbNodes);
     list<poolStruct> violatedConst;
     char * w1w2 = argv[2]; 
@@ -803,9 +803,10 @@ int main(int argc, char** argv){
 	   
 	    
 	    cplex.use(GenUserCut(env,G,Gp,violatedConst,stat,true,momo));
+		stat.formulation = "w1w2";
 
 	}else if( strcmp(w1w2,"0")==1){  // lazy BFS, User Glout
-
+		stat.formulation = "w1w2 GLOUT";
 		cplex.use(SimpleLazyCut(env,G,Gp,violatedConst,stat,true,momo));
 	   
 	    
@@ -813,7 +814,7 @@ int main(int argc, char** argv){
 
 	}else{  //lazy BFS, User Glout puis PL si glout ne génère rien
 
-
+		stat.formulation = "w1w2 GLOUT+PL";
 		cplex.use(SimpleLazyCut(env,G,Gp,violatedConst,stat,true,momo));
 	   
 	    
@@ -871,10 +872,15 @@ int main(int argc, char** argv){
 	
     env.out() << "Solution value  = " << cplex.getObjValue() << endl;
     //G.Write_sol_ps_pdf();
+
 	stat.nbNodes = cplex.getNnodes();
 	stat.optimalityGap = cplex.getMIPRelativeGap();
 	stat.end = clock();
+	stat.computeTime();
+	stat.name = bl;
 	stat.nbCst= 0;
+	stat.nbNoeudInstance = G._nbNodes;
+	stat.nbAreteInstance  = G._edges.size();
 	stat.printInfo();
 	stat.writeFile(fResultName);
     

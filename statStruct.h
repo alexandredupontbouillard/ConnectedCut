@@ -18,14 +18,17 @@ struct statStruct{
   int nbCuts[5];
   float temps[5];
   int nbNodes;
-  float start;
+  clock_t start;
   string formulation;
-  float end;
+  clock_t end;
   float totalTime;
   float optimalityGap;
   int nbCst;
+  int nbAreteInstance;
+  int nbNoeudInstance;
   float bestObj;
   float bestInteger;
+  char * name;
   void init(){
 
 	//initialiser chacun des compteurs de contraintes générées

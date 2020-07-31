@@ -5,6 +5,7 @@
 #include "Graph.h"
 #include "statStruct.h"
 #include <ctime>
+#include <chrono>
 #define fResultName "result.csv"
 #define epsilon 0.00001
 int main(int argc, char** argv){
@@ -17,8 +18,8 @@ int main(int argc, char** argv){
 	    	cout << "Error : the command should be followed by a filename" << endl;
 	    	exit(1);
 		}
-
-		Graph G(argv[1]);
+		char * bl = argv[1];
+		Graph G(bl);
 		
 
 	int nbCst= 0;
@@ -36,7 +37,7 @@ int main(int argc, char** argv){
 
 	vector<pair<IloNumVar,IloNumVar>> flot(G._edges.size());  // arête uv  -->  pair<uv,vu>
 	//initialisation des variables
-	stat.start = clock();
+	
 	for(int i = 0 ; i < G._nbNodes ; i ++){
 		sommets[i] = make_pair(IloNumVar(env, 0.0, 1.0, IloNumVar::Int,""),IloNumVar(env, 0.0, 1.0, IloNumVar::Int,""))  ;
 
@@ -181,8 +182,9 @@ int main(int argc, char** argv){
 	model.add(CC);
 	
     // And Finally
-    IloCplex cplex(model);
 	
+    IloCplex cplex(model);
+	    cplex.setParam(IloCplex::Param::TimeLimit, 3600);
 
 	IloObjective obj=IloAdd(model, IloMaximize(env, 0.0));
 	i = 0;	
@@ -191,7 +193,12 @@ int main(int argc, char** argv){
 		obj.setLinearCoef(edge[i], (*itEdge)->_cost);
 		i++;
 	}
+	auto start = chrono::steady_clock::now();
+	stat.start = clock();
 	cplex.solve();
+	stat.end = clock();
+	auto end = chrono::steady_clock::now();
+	
 	i = 0;
     for (list<Edge*>::iterator itEdge = G._edges.begin(); itEdge != G._edges.end(); itEdge++){
       (*itEdge)->_valx = cplex.getValue(edge[i]);
@@ -200,16 +207,18 @@ int main(int argc, char** argv){
     }
 	    env.out() << "Solution value  = " << cplex.getObjValue() << endl;
 
-	stat.end = clock();
+	
    	stat.nbNodes = cplex.getNnodes();
 	stat.optimalityGap = cplex.getMIPRelativeGap();
-	
+	stat.nbNoeudInstance = G._nbNodes;
+	stat.nbAreteInstance  = G._edges.size();
 	stat.nbCst = nbCst;
+	stat.name = bl;
+	stat.totalTime = chrono::duration_cast<chrono::seconds>(end - start).count();
 	stat.printInfo();
 
-
 	stat.writeFile(fResultName);
-
+	
     cplex.end();
 	
 	}

@@ -1,0 +1,453 @@
+./w1w2 data_clean/random/n100p05c10.col 1
+./w1w2 data_clean/random/n100p05c1.col 1
+./w1w2 data_clean/random/n100p05c2.col 1
+./w1w2 data_clean/random/n100p05c3.col 1
+./w1w2 data_clean/random/n100p05c4.col 1
+./w1w2 data_clean/random/n100p05c5.col 1
+./w1w2 data_clean/random/n100p05c6.col 1
+./w1w2 data_clean/random/n100p05c7.col 1
+./w1w2 data_clean/random/n100p05c8.col 1
+./w1w2 data_clean/random/n100p05c9.col 1
+./w1w2 data_clean/random/n100p10c10.col 1
+./w1w2 data_clean/random/n100p10c1.col 1
+./w1w2 data_clean/random/n100p10c2.col 1
+./w1w2 data_clean/random/n100p10c3.col 1
+./w1w2 data_clean/random/n100p10c4.col 1
+./w1w2 data_clean/random/n100p10c5.col 1
+./w1w2 data_clean/random/n100p10c6.col 1
+./w1w2 data_clean/random/n100p10c7.col 1
+./w1w2 data_clean/random/n100p10c8.col 1
+./w1w2 data_clean/random/n100p10c9.col 1
+./w1w2 data_clean/random/n100p15c10.col 1
+./w1w2 data_clean/random/n100p15c1.col 1
+./w1w2 data_clean/random/n100p15c2.col 1
+./w1w2 data_clean/random/n100p15c3.col 1
+./w1w2 data_clean/random/n100p15c4.col 1
+./w1w2 data_clean/random/n100p15c5.col 1
+./w1w2 data_clean/random/n100p15c6.col 1
+./w1w2 data_clean/random/n100p15c7.col 1
+./w1w2 data_clean/random/n100p15c8.col 1
+./w1w2 data_clean/random/n100p15c9.col 1
+./w1w2 data_clean/random/n100p20c10.col 1
+./w1w2 data_clean/random/n100p20c1.col 1
+./w1w2 data_clean/random/n100p20c2.col 1
+./w1w2 data_clean/random/n100p20c3.col 1
+./w1w2 data_clean/random/n100p20c4.col 1
+./w1w2 data_clean/random/n100p20c5.col 1
+./w1w2 data_clean/random/n100p20c6.col 1
+./w1w2 data_clean/random/n100p20c7.col 1
+./w1w2 data_clean/random/n100p20c8.col 1
+./w1w2 data_clean/random/n100p20c9.col 1
+./w1w2 data_clean/random/n50p10c5.col 1
+./w1w2 data_clean/random/n60p05c4.col 1
+./w1w2 data_clean/random/n60p20c10.col 1
+./w1w2 data_clean/random/n60p20c1.col 1
+./w1w2 data_clean/random/n60p20c2.col 1
+./w1w2 data_clean/random/n60p20c3.col 1
+./w1w2 data_clean/random/n60p20c4.col 1
+./w1w2 data_clean/random/n60p20c5.col 1
+./w1w2 data_clean/random/n60p20c6.col 1
+./w1w2 data_clean/random/n60p20c7.col 1
+./w1w2 data_clean/random/n60p20c8.col 1
+./w1w2 data_clean/random/n60p20c9.col 1
+./w1w2 data_clean/random/n70p05c4.col 1
+./w1w2 data_clean/random/n70p10c10.col 1
+./w1w2 data_clean/random/n70p10c1.col 1
+./w1w2 data_clean/random/n70p10c2.col 1
+./w1w2 data_clean/random/n70p10c3.col 1
+./w1w2 data_clean/random/n70p10c4.col 1
+./w1w2 data_clean/random/n70p10c5.col 1
+./w1w2 data_clean/random/n70p10c6.col 1
+./w1w2 data_clean/random/n70p10c8.col 1
+./w1w2 data_clean/random/n70p10c9.col 1
+./w1w2 data_clean/random/n70p15c10.col 1
+./w1w2 data_clean/random/n70p15c1.col 1
+./w1w2 data_clean/random/n70p15c2.col 1
+./w1w2 data_clean/random/n70p15c3.col 1
+./w1w2 data_clean/random/n70p15c4.col 1
+./w1w2 data_clean/random/n70p15c5.col 1
+./w1w2 data_clean/random/n70p15c6.col 1
+./w1w2 data_clean/random/n70p15c7.col 1
+./w1w2 data_clean/random/n70p15c8.col 1
+./w1w2 data_clean/random/n70p15c9.col 1
+./w1w2 data_clean/random/n70p20c10.col 1
+./w1w2 data_clean/random/n70p20c1.col 1
+./w1w2 data_clean/random/n70p20c2.col 1
+./w1w2 data_clean/random/n70p20c3.col 1
+./w1w2 data_clean/random/n70p20c4.col 1
+./w1w2 data_clean/random/n70p20c5.col 1
+./w1w2 data_clean/random/n70p20c6.col 1
+./w1w2 data_clean/random/n70p20c7.col 1
+./w1w2 data_clean/random/n70p20c8.col 1
+./w1w2 data_clean/random/n70p20c9.col 1
+./w1w2 data_clean/random/n80p05c10.col 1
+./w1w2 data_clean/random/n80p05c3.col 1
+./w1w2 data_clean/random/n80p05c4.col 1
+./w1w2 data_clean/random/n80p10c10.col 1
+./w1w2 data_clean/random/n80p10c1.col 1
+./w1w2 data_clean/random/n80p10c2.col 1
+./w1w2 data_clean/random/n80p10c3.col 1
+./w1w2 data_clean/random/n80p10c4.col 1
+./w1w2 data_clean/random/n80p10c5.col 1
+./w1w2 data_clean/random/n80p10c6.col 1
+./w1w2 data_clean/random/n80p10c7.col 1
+./w1w2 data_clean/random/n80p10c8.col 1
+./w1w2 data_clean/random/n80p10c9.col 1
+./w1w2 data_clean/random/n80p15c10.col 1
+./w1w2 data_clean/random/n80p15c1.col 1
+./w1w2 data_clean/random/n80p15c2.col 1
+./w1w2 data_clean/random/n80p15c3.col 1
+./w1w2 data_clean/random/n80p15c4.col 1
+./w1w2 data_clean/random/n80p15c5.col 1
+./w1w2 data_clean/random/n80p15c6.col 1
+./w1w2 data_clean/random/n80p15c7.col 1
+./w1w2 data_clean/random/n80p15c8.col 1
+./w1w2 data_clean/random/n80p15c9.col 1
+./w1w2 data_clean/random/n80p20c10.col 1
+./w1w2 data_clean/random/n80p20c1.col 1
+./w1w2 data_clean/random/n80p20c2.col 1
+./w1w2 data_clean/random/n80p20c3.col 1
+./w1w2 data_clean/random/n80p20c4.col 1
+./w1w2 data_clean/random/n80p20c5.col 1
+./w1w2 data_clean/random/n80p20c6.col 1
+./w1w2 data_clean/random/n80p20c7.col 1
+./w1w2 data_clean/random/n80p20c8.col 1
+./w1w2 data_clean/random/n80p20c9.col 1
+./w1w2 data_clean/random/n90p05c10.col 1
+./w1w2 data_clean/random/n90p05c2.col 1
+./w1w2 data_clean/random/n90p05c4.col 1
+./w1w2 data_clean/random/n90p05c8.col 1
+./w1w2 data_clean/random/n90p05c9.col 1
+./w1w2 data_clean/random/n90p10c10.col 1
+./w1w2 data_clean/random/n90p10c1.col 1
+./w1w2 data_clean/random/n90p10c2.col 1
+./w1w2 data_clean/random/n90p10c3.col 1
+./w1w2 data_clean/random/n90p10c4.col 1
+./w1w2 data_clean/random/n90p10c5.col 1
+./w1w2 data_clean/random/n90p10c6.col 1
+./w1w2 data_clean/random/n90p10c7.col 1
+./w1w2 data_clean/random/n90p10c8.col 1
+./w1w2 data_clean/random/n90p10c9.col 1
+./w1w2 data_clean/random/n90p15c10.col 1
+./w1w2 data_clean/random/n90p15c1.col 1
+./w1w2 data_clean/random/n90p15c2.col 1
+./w1w2 data_clean/random/n90p15c3.col 1
+./w1w2 data_clean/random/n90p15c4.col 1
+./w1w2 data_clean/random/n90p15c5.col 1
+./w1w2 data_clean/random/n90p15c6.col 1
+./w1w2 data_clean/random/n90p15c7.col 1
+./w1w2 data_clean/random/n90p15c8.col 1
+./w1w2 data_clean/random/n90p15c9.col 1
+./w1w2 data_clean/random/n90p20c10.col 1
+./w1w2 data_clean/random/n90p20c1.col 1
+./w1w2 data_clean/random/n90p20c2.col 1
+./w1w2 data_clean/random/n90p20c3.col 1
+./w1w2 data_clean/random/n90p20c4.col 1
+./w1w2 data_clean/random/n90p20c5.col 1
+./w1w2 data_clean/random/n90p20c6.col 1
+./w1w2 data_clean/random/n90p20c7.col 1
+./w1w2 data_clean/random/n90p20c8.col 1
+./w1w2 data_clean/random/n90p20c9.col 1
+
+./w1w2 data_clean/random/n100p05c10.col 2
+./w1w2 data_clean/random/n100p05c1.col 2
+./w1w2 data_clean/random/n100p05c2.col 2
+./w1w2 data_clean/random/n100p05c3.col 2
+./w1w2 data_clean/random/n100p05c4.col 2
+./w1w2 data_clean/random/n100p05c5.col 2
+./w1w2 data_clean/random/n100p05c6.col 2
+./w1w2 data_clean/random/n100p05c7.col 2
+./w1w2 data_clean/random/n100p05c8.col 2
+./w1w2 data_clean/random/n100p05c9.col 2
+./w1w2 data_clean/random/n100p10c10.col 2
+./w1w2 data_clean/random/n100p10c1.col 2
+./w1w2 data_clean/random/n100p10c2.col 2
+./w1w2 data_clean/random/n100p10c3.col 2
+./w1w2 data_clean/random/n100p10c4.col 2
+./w1w2 data_clean/random/n100p10c5.col 2
+./w1w2 data_clean/random/n100p10c6.col 2
+./w1w2 data_clean/random/n100p10c7.col 2
+./w1w2 data_clean/random/n100p10c8.col 2
+./w1w2 data_clean/random/n100p10c9.col 2
+./w1w2 data_clean/random/n100p15c10.col 2
+./w1w2 data_clean/random/n100p15c1.col 2
+./w1w2 data_clean/random/n100p15c2.col 2
+./w1w2 data_clean/random/n100p15c3.col 2
+./w1w2 data_clean/random/n100p15c4.col 2
+./w1w2 data_clean/random/n100p15c5.col 2
+./w1w2 data_clean/random/n100p15c6.col 2
+./w1w2 data_clean/random/n100p15c7.col 2
+./w1w2 data_clean/random/n100p15c8.col 2
+./w1w2 data_clean/random/n100p15c9.col 2
+./w1w2 data_clean/random/n100p20c10.col 2
+./w1w2 data_clean/random/n100p20c1.col 2
+./w1w2 data_clean/random/n100p20c2.col 2
+./w1w2 data_clean/random/n100p20c3.col 2
+./w1w2 data_clean/random/n100p20c4.col 2
+./w1w2 data_clean/random/n100p20c5.col 2
+./w1w2 data_clean/random/n100p20c6.col 2
+./w1w2 data_clean/random/n100p20c7.col 2
+./w1w2 data_clean/random/n100p20c8.col 2
+./w1w2 data_clean/random/n100p20c9.col 2
+./w1w2 data_clean/random/n50p10c5.col 2
+./w1w2 data_clean/random/n60p05c4.col 2
+./w1w2 data_clean/random/n60p20c10.col 2
+./w1w2 data_clean/random/n60p20c1.col 2
+./w1w2 data_clean/random/n60p20c2.col 2
+./w1w2 data_clean/random/n60p20c3.col 2
+./w1w2 data_clean/random/n60p20c4.col 2
+./w1w2 data_clean/random/n60p20c5.col 2
+./w1w2 data_clean/random/n60p20c6.col 2
+./w1w2 data_clean/random/n60p20c7.col 2
+./w1w2 data_clean/random/n60p20c8.col 2
+./w1w2 data_clean/random/n60p20c9.col 2
+./w1w2 data_clean/random/n70p05c4.col 2
+./w1w2 data_clean/random/n70p10c10.col 2
+./w1w2 data_clean/random/n70p10c1.col 2
+./w1w2 data_clean/random/n70p10c2.col 2
+./w1w2 data_clean/random/n70p10c3.col 2
+./w1w2 data_clean/random/n70p10c4.col 2
+./w1w2 data_clean/random/n70p10c5.col 2
+./w1w2 data_clean/random/n70p10c6.col 2
+./w1w2 data_clean/random/n70p10c8.col 2
+./w1w2 data_clean/random/n70p10c9.col 2
+./w1w2 data_clean/random/n70p15c10.col 2
+./w1w2 data_clean/random/n70p15c1.col 2
+./w1w2 data_clean/random/n70p15c2.col 2
+./w1w2 data_clean/random/n70p15c3.col 2
+./w1w2 data_clean/random/n70p15c4.col 2
+./w1w2 data_clean/random/n70p15c5.col 2
+./w1w2 data_clean/random/n70p15c6.col 2
+./w1w2 data_clean/random/n70p15c7.col 2
+./w1w2 data_clean/random/n70p15c8.col 2
+./w1w2 data_clean/random/n70p15c9.col 2
+./w1w2 data_clean/random/n70p20c10.col 2
+./w1w2 data_clean/random/n70p20c1.col 2
+./w1w2 data_clean/random/n70p20c2.col 2
+./w1w2 data_clean/random/n70p20c3.col 2
+./w1w2 data_clean/random/n70p20c4.col 2
+./w1w2 data_clean/random/n70p20c5.col 2
+./w1w2 data_clean/random/n70p20c6.col 2
+./w1w2 data_clean/random/n70p20c7.col 2
+./w1w2 data_clean/random/n70p20c8.col 2
+./w1w2 data_clean/random/n70p20c9.col 2
+./w1w2 data_clean/random/n80p05c10.col 2
+./w1w2 data_clean/random/n80p05c3.col 2
+./w1w2 data_clean/random/n80p05c4.col 2
+./w1w2 data_clean/random/n80p10c10.col 2
+./w1w2 data_clean/random/n80p10c1.col 2
+./w1w2 data_clean/random/n80p10c2.col 2
+./w1w2 data_clean/random/n80p10c3.col 2
+./w1w2 data_clean/random/n80p10c4.col 2
+./w1w2 data_clean/random/n80p10c5.col 2
+./w1w2 data_clean/random/n80p10c6.col 2
+./w1w2 data_clean/random/n80p10c7.col 2
+./w1w2 data_clean/random/n80p10c8.col 2
+./w1w2 data_clean/random/n80p10c9.col 2
+./w1w2 data_clean/random/n80p15c10.col 2
+./w1w2 data_clean/random/n80p15c1.col 2
+./w1w2 data_clean/random/n80p15c2.col 2
+./w1w2 data_clean/random/n80p15c3.col 2
+./w1w2 data_clean/random/n80p15c4.col 2
+./w1w2 data_clean/random/n80p15c5.col 2
+./w1w2 data_clean/random/n80p15c6.col 2
+./w1w2 data_clean/random/n80p15c7.col 2
+./w1w2 data_clean/random/n80p15c8.col 2
+./w1w2 data_clean/random/n80p15c9.col 2
+./w1w2 data_clean/random/n80p20c10.col 2
+./w1w2 data_clean/random/n80p20c1.col 2
+./w1w2 data_clean/random/n80p20c2.col 2
+./w1w2 data_clean/random/n80p20c3.col 2
+./w1w2 data_clean/random/n80p20c4.col 2
+./w1w2 data_clean/random/n80p20c5.col 2
+./w1w2 data_clean/random/n80p20c6.col 2
+./w1w2 data_clean/random/n80p20c7.col 2
+./w1w2 data_clean/random/n80p20c8.col 2
+./w1w2 data_clean/random/n80p20c9.col 2
+./w1w2 data_clean/random/n90p05c10.col 2
+./w1w2 data_clean/random/n90p05c2.col 2
+./w1w2 data_clean/random/n90p05c4.col 2
+./w1w2 data_clean/random/n90p05c8.col 2
+./w1w2 data_clean/random/n90p05c9.col 2
+./w1w2 data_clean/random/n90p10c10.col 2
+./w1w2 data_clean/random/n90p10c1.col 2
+./w1w2 data_clean/random/n90p10c2.col 2
+./w1w2 data_clean/random/n90p10c3.col 2
+./w1w2 data_clean/random/n90p10c4.col 2
+./w1w2 data_clean/random/n90p10c5.col 2
+./w1w2 data_clean/random/n90p10c6.col 2
+./w1w2 data_clean/random/n90p10c7.col 2
+./w1w2 data_clean/random/n90p10c8.col 2
+./w1w2 data_clean/random/n90p10c9.col 2
+./w1w2 data_clean/random/n90p15c10.col 2
+./w1w2 data_clean/random/n90p15c1.col 2
+./w1w2 data_clean/random/n90p15c2.col 2
+./w1w2 data_clean/random/n90p15c3.col 2
+./w1w2 data_clean/random/n90p15c4.col 2
+./w1w2 data_clean/random/n90p15c5.col 2
+./w1w2 data_clean/random/n90p15c6.col 2
+./w1w2 data_clean/random/n90p15c7.col 2
+./w1w2 data_clean/random/n90p15c8.col 2
+./w1w2 data_clean/random/n90p15c9.col 2
+./w1w2 data_clean/random/n90p20c10.col 2
+./w1w2 data_clean/random/n90p20c1.col 2
+./w1w2 data_clean/random/n90p20c2.col 2
+./w1w2 data_clean/random/n90p20c3.col 2
+./w1w2 data_clean/random/n90p20c4.col 2
+./w1w2 data_clean/random/n90p20c5.col 2
+./w1w2 data_clean/random/n90p20c6.col 2
+./w1w2 data_clean/random/n90p20c7.col 2
+./w1w2 data_clean/random/n90p20c8.col 2
+./w1w2 data_clean/random/n90p20c9.col 2
+
+./hojny_flot data_clean/random/n100p05c10.col
+./hojny_flot data_clean/random/n100p05c1.col
+./hojny_flot data_clean/random/n100p05c2.col
+./hojny_flot data_clean/random/n100p05c3.col
+./hojny_flot data_clean/random/n100p05c4.col
+./hojny_flot data_clean/random/n100p05c5.col
+./hojny_flot data_clean/random/n100p05c6.col
+./hojny_flot data_clean/random/n100p05c7.col
+./hojny_flot data_clean/random/n100p05c8.col
+./hojny_flot data_clean/random/n100p05c9.col
+./hojny_flot data_clean/random/n100p10c10.col
+./hojny_flot data_clean/random/n100p10c1.col
+./hojny_flot data_clean/random/n100p10c2.col
+./hojny_flot data_clean/random/n100p10c3.col
+./hojny_flot data_clean/random/n100p10c4.col
+./hojny_flot data_clean/random/n100p10c5.col
+./hojny_flot data_clean/random/n100p10c6.col
+./hojny_flot data_clean/random/n100p10c7.col
+./hojny_flot data_clean/random/n100p10c8.col
+./hojny_flot data_clean/random/n100p10c9.col
+./hojny_flot data_clean/random/n100p15c10.col
+./hojny_flot data_clean/random/n100p15c1.col
+./hojny_flot data_clean/random/n100p15c2.col
+./hojny_flot data_clean/random/n100p15c3.col
+./hojny_flot data_clean/random/n100p15c4.col
+./hojny_flot data_clean/random/n100p15c5.col
+./hojny_flot data_clean/random/n100p15c6.col
+./hojny_flot data_clean/random/n100p15c7.col
+./hojny_flot data_clean/random/n100p15c8.col
+./hojny_flot data_clean/random/n100p15c9.col
+./hojny_flot data_clean/random/n100p20c10.col
+./hojny_flot data_clean/random/n100p20c1.col
+./hojny_flot data_clean/random/n100p20c2.col
+./hojny_flot data_clean/random/n100p20c3.col
+./hojny_flot data_clean/random/n100p20c4.col
+./hojny_flot data_clean/random/n100p20c5.col
+./hojny_flot data_clean/random/n100p20c6.col
+./hojny_flot data_clean/random/n100p20c7.col
+./hojny_flot data_clean/random/n100p20c8.col
+./hojny_flot data_clean/random/n100p20c9.col
+./hojny_flot data_clean/random/n50p10c5.col
+./hojny_flot data_clean/random/n60p05c4.col
+./hojny_flot data_clean/random/n60p20c10.col
+./hojny_flot data_clean/random/n60p20c1.col
+./hojny_flot data_clean/random/n60p20c2.col
+./hojny_flot data_clean/random/n60p20c3.col
+./hojny_flot data_clean/random/n60p20c4.col
+./hojny_flot data_clean/random/n60p20c5.col
+./hojny_flot data_clean/random/n60p20c6.col
+./hojny_flot data_clean/random/n60p20c7.col
+./hojny_flot data_clean/random/n60p20c8.col
+./hojny_flot data_clean/random/n60p20c9.col
+./hojny_flot data_clean/random/n70p05c4.col
+./hojny_flot data_clean/random/n70p10c10.col
+./hojny_flot data_clean/random/n70p10c1.col
+./hojny_flot data_clean/random/n70p10c2.col
+./hojny_flot data_clean/random/n70p10c3.col
+./hojny_flot data_clean/random/n70p10c4.col
+./hojny_flot data_clean/random/n70p10c5.col
+./hojny_flot data_clean/random/n70p10c6.col
+./hojny_flot data_clean/random/n70p10c8.col
+./hojny_flot data_clean/random/n70p10c9.col
+./hojny_flot data_clean/random/n70p15c10.col
+./hojny_flot data_clean/random/n70p15c1.col
+./hojny_flot data_clean/random/n70p15c2.col
+./hojny_flot data_clean/random/n70p15c3.col
+./hojny_flot data_clean/random/n70p15c4.col
+./hojny_flot data_clean/random/n70p15c5.col
+./hojny_flot data_clean/random/n70p15c6.col
+./hojny_flot data_clean/random/n70p15c7.col
+./hojny_flot data_clean/random/n70p15c8.col
+./hojny_flot data_clean/random/n70p15c9.col
+./hojny_flot data_clean/random/n70p20c10.col
+./hojny_flot data_clean/random/n70p20c1.col
+./hojny_flot data_clean/random/n70p20c2.col
+./hojny_flot data_clean/random/n70p20c3.col
+./hojny_flot data_clean/random/n70p20c4.col
+./hojny_flot data_clean/random/n70p20c5.col
+./hojny_flot data_clean/random/n70p20c6.col
+./hojny_flot data_clean/random/n70p20c7.col
+./hojny_flot data_clean/random/n70p20c8.col
+./hojny_flot data_clean/random/n70p20c9.col
+./hojny_flot data_clean/random/n80p05c10.col
+./hojny_flot data_clean/random/n80p05c3.col
+./hojny_flot data_clean/random/n80p05c4.col
+./hojny_flot data_clean/random/n80p10c10.col
+./hojny_flot data_clean/random/n80p10c1.col
+./hojny_flot data_clean/random/n80p10c2.col
+./hojny_flot data_clean/random/n80p10c3.col
+./hojny_flot data_clean/random/n80p10c4.col
+./hojny_flot data_clean/random/n80p10c5.col
+./hojny_flot data_clean/random/n80p10c6.col
+./hojny_flot data_clean/random/n80p10c7.col
+./hojny_flot data_clean/random/n80p10c8.col
+./hojny_flot data_clean/random/n80p10c9.col
+./hojny_flot data_clean/random/n80p15c10.col
+./hojny_flot data_clean/random/n80p15c1.col
+./hojny_flot data_clean/random/n80p15c2.col
+./hojny_flot data_clean/random/n80p15c3.col
+./hojny_flot data_clean/random/n80p15c4.col
+./hojny_flot data_clean/random/n80p15c5.col
+./hojny_flot data_clean/random/n80p15c6.col
+./hojny_flot data_clean/random/n80p15c7.col
+./hojny_flot data_clean/random/n80p15c8.col
+./hojny_flot data_clean/random/n80p15c9.col
+./hojny_flot data_clean/random/n80p20c10.col
+./hojny_flot data_clean/random/n80p20c1.col
+./hojny_flot data_clean/random/n80p20c2.col
+./hojny_flot data_clean/random/n80p20c3.col
+./hojny_flot data_clean/random/n80p20c4.col
+./hojny_flot data_clean/random/n80p20c5.col
+./hojny_flot data_clean/random/n80p20c6.col
+./hojny_flot data_clean/random/n80p20c7.col
+./hojny_flot data_clean/random/n80p20c8.col
+./hojny_flot data_clean/random/n80p20c9.col
+./hojny_flot data_clean/random/n90p05c10.col
+./hojny_flot data_clean/random/n90p05c2.col
+./hojny_flot data_clean/random/n90p05c4.col
+./hojny_flot data_clean/random/n90p05c8.col
+./hojny_flot data_clean/random/n90p05c9.col
+./hojny_flot data_clean/random/n90p10c10.col
+./hojny_flot data_clean/random/n90p10c1.col
+./hojny_flot data_clean/random/n90p10c2.col
+./hojny_flot data_clean/random/n90p10c3.col
+./hojny_flot data_clean/random/n90p10c4.col
+./hojny_flot data_clean/random/n90p10c5.col
+./hojny_flot data_clean/random/n90p10c6.col
+./hojny_flot data_clean/random/n90p10c7.col
+./hojny_flot data_clean/random/n90p10c8.col
+./hojny_flot data_clean/random/n90p10c9.col
+./hojny_flot data_clean/random/n90p15c10.col
+./hojny_flot data_clean/random/n90p15c1.col
+./hojny_flot data_clean/random/n90p15c2.col
+./hojny_flot data_clean/random/n90p15c3.col
+./hojny_flot data_clean/random/n90p15c4.col
+./hojny_flot data_clean/random/n90p15c5.col
+./hojny_flot data_clean/random/n90p15c6.col
+./hojny_flot data_clean/random/n90p15c7.col
+./hojny_flot data_clean/random/n90p15c8.col
+./hojny_flot data_clean/random/n90p15c9.col
+./hojny_flot data_clean/random/n90p20c10.col
+./hojny_flot data_clean/random/n90p20c1.col
+./hojny_flot data_clean/random/n90p20c2.col
+./hojny_flot data_clean/random/n90p20c3.col
+./hojny_flot data_clean/random/n90p20c4.col
+./hojny_flot data_clean/random/n90p20c5.col
+./hojny_flot data_clean/random/n90p20c6.col
+./hojny_flot data_clean/random/n90p20c7.col
+./hojny_flot data_clean/random/n90p20c8.col
+./hojny_flot data_clean/random/n90p20c9.col
+

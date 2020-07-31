@@ -1,0 +1,19 @@
+./w1w2 data_clean/gas/GasLib_134.gas 1
+./w1w2 data_clean/gas/GasLib_135.gas 1
+./w1w2 data_clean/gas/GasLib_24.gas 1
+./w1w2 data_clean/gas/GasLib_40.gas 1
+./w1w2 data_clean/gas/GasLib_582-v2.gas 1
+
+./w1w2 data_clean/gas/GasLib_134.gas 2
+./w1w2 data_clean/gas/GasLib_135.gas 2
+./w1w2 data_clean/gas/GasLib_24.gas 2
+./w1w2 data_clean/gas/GasLib_40.gas 2
+./w1w2 data_clean/gas/GasLib_582-v2.gas 2
+
+./hojny_flot data_clean/gas/GasLib_134.gas
+./hojny_flot data_clean/gas/GasLib_135.gas
+./hojny_flot data_clean/gas/GasLib_24.gas
+./hojny_flot data_clean/gas/GasLib_40.gas
+./hojny_flot data_clean/gas/GasLib_582-v2.gas
+
+

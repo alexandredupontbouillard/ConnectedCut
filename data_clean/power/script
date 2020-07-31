@@ -1,0 +1,24 @@
+    for fich in `ls . `
+    do
+            if [ -f $fich ]
+            then
+                    echo ./w1w2 data_clean/power/$fich 1
+            fi
+    done
+
+    for fich in `ls . `
+    do
+            if [ -f $fich ]
+            then
+                    echo ./w1w2 data_clean/power/$fich 2
+            fi
+    done
+
+    for fich in `ls . `
+    do
+            if [ -f $fich ]
+            then
+                    echo ./hojny_flot data_clean/power/$fich 
+            fi
+    done
+

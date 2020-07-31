@@ -1,0 +1,48 @@
+
+./w1w2 data_clean/meth2_2_0010_att10.dat 1
+./w1w2 data_clean/meth0_5_0048_att48.dat 1
+./w1w2 data_clean/meth0_6_0048_att48.dat 1
+./w1w2 data_clean/meth0_10_0048_att48.dat 1
+./w1w2 data_clean/meth2_2_0020_att20.dat 1
+./w1w2 data_clean/meth2_2_0048_att48.dat 1
+./w1w2 data_clean/meth2_3_0048_att48.dat 1
+
+
+./w1w2 data_clean/meth2_2_0010_att10.dat 2
+./w1w2 data_clean/meth0_5_0048_att48.dat 2
+./w1w2 data_clean/meth0_6_0048_att48.dat 2
+./w1w2 data_clean/meth0_10_0048_att48.dat 2
+./w1w2 data_clean/meth2_2_0020_att20.dat 2
+./w1w2 data_clean/meth2_2_0048_att48.dat 2
+./w1w2 data_clean/meth2_3_0048_att48.dat 2
+
+
+./hojny_flot data_clean/meth2_2_0010_att10.dat
+./hojny_flot data_clean/meth0_5_0048_att48.dat
+./hojny_flot data_clean/meth0_6_0048_att48.dat
+./hojny_flot data_clean/meth0_10_0048_att48.dat
+./hojny_flot data_clean/meth2_2_0020_att20.dat
+./hojny_flot data_clean/meth2_2_0048_att48.dat
+./hojny_flot data_clean/meth2_3_0048_att48.dat
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+

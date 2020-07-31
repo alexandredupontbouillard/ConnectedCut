@@ -49,7 +49,7 @@ LEMONINCDIR = $(LEMONDIR)/include/lemon
 
 CCFLAGS = $(CCOPT) -I$(CPLEXINCDIR) -I$(CONCERTINCDIR) -I$(LEMONINCDIR)
 
-all:	MCCP_Tree_Form formulationFlot w1w2 hojny_flot 
+all:	MCCP_Tree_Form formulationFlot w1w2 hojny_flot  test2connected
 
 MCCP_Tree_Form: MCCP_Tree_Form.o Graph.o heap2k.o heap2k.h Graph.h 
 	$(CCC) $(CCFLAGS) MCCP_Tree_Form.o heap2k.o Graph.o -o MCCP_Tree_Form $(CCLNFLAGS)
@@ -62,6 +62,12 @@ w1w2: w1w2.o Graph.o heap2k.o heap2k.h Graph.h minSeparator.o statStruct.o statS
 
 w1w2.o: w1w2.cpp Graph.h minSeparator.h statStruct.h ModelMinSeparator.h 
 	$(CCC) -c $(CCFLAGS) w1w2.cpp -o w1w2.o
+
+test2connected: test2connected.o Graph.o heap2k.o heap2k.h Graph.h 
+	$(CCC) $(CCFLAGS) test2connected.o   heap2k.o Graph.o  -o test2connected $(CCLNFLAGS)
+
+test2connected.o: test2connected.cpp Graph.h 
+	$(CCC) -c $(CCFLAGS) test2connected.cpp -o test2connected.o
 
 ModelMinSeparator.o: ModelMinSeparator.cpp ModelMinSeparator.h Graph.h 
 	$(CCC) -c $(CCFLAGS) ModelMinSeparator.cpp -o ModelMinSeparator.o
